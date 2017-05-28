@@ -30,6 +30,7 @@ public class ConferenceDetailActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstancestate){
         super.onCreate(savedInstancestate);
         setContentView(R.layout.activity_conference_detail);
+        setTitle("Информация о конференции");
         mTitleView = (TextView) findViewById(R.id.tv_conference_detail_title);
         mDescView = (TextView) findViewById(R.id.tv_conference_detail_desc);
 

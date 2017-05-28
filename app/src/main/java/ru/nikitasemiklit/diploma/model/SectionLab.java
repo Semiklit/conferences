@@ -1,11 +1,18 @@
 package ru.nikitasemiklit.diploma.model;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+
+import ru.nikitasemiklit.diploma.database.SectionCursorWrapper;
+import ru.nikitasemiklit.diploma.database.SusuConferenceBaseHelper;
+import ru.nikitasemiklit.diploma.database.SusuConferenceDbSchema;
+import ru.nikitasemiklit.diploma.database.SusuConferenceDbSchema.SectionTable;
 
 /**
  * Created by nikitasemiklit1 on 23.05.17.
@@ -13,11 +20,26 @@ import java.util.UUID;
 
 public class SectionLab {
 
-    public List<Section> getSections() {
-        return mSections;
+    public List<Section> getSections(UUID conferenceId) {
+
+        List<Section> sections = new ArrayList<>();
+        SectionCursorWrapper cursor = querySections(SectionTable.Cols.CONFERENCE_UUID + " = ?", new String[] { conferenceId.toString() });
+
+        try{
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                sections.add(cursor.getSection());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return sections;
     }
 
-    private List<Section> mSections;
+    private Context mContext;
+    private SQLiteDatabase mDataBase;
 
     private static SectionLab sSectionLab;
 
@@ -29,29 +51,70 @@ public class SectionLab {
     }
 
     private SectionLab(Context context){
-        mSections = new ArrayList<>();
-        List <Conference> mConferences = ConferenceLab.get(context).getConferences();
-        Iterator<Conference> iterator = mConferences.iterator();
-        for (int i = 0; i < 500; i++){
-            Section section = new Section();
-            section.setConferenceId(UUID.randomUUID());
-            if (iterator.hasNext()) {
-                section.setConferenceId(iterator.next().getConferenceId());
-            } else {
-                iterator = mConferences.iterator();
-                section.setConferenceId(iterator.next().getConferenceId());
-            }
-            section.setTitle("Section #" + i);
-            mSections.add(section);
-        }
-    };
+        mContext = context.getApplicationContext();
+        mDataBase = new SusuConferenceBaseHelper(mContext).getWritableDatabase();
+    }
 
     public Section getSection(UUID id){
-        for (Section section : mSections){
-            if (section.getSectionId().equals(id)){
-                return section;
+        SectionCursorWrapper cursor = querySections(
+                SectionTable.Cols.UUID + " = ?", new String[] { id.toString()}
+        );
+
+        try{
+            if (cursor.getCount() == 0){
+                return null;
             }
+
+            cursor.moveToFirst();
+            return cursor.getSection();
+        } finally {
+            cursor.close();
         }
-        return null;
+    }
+
+    private static ContentValues getContentValues (Section section){
+        ContentValues values = new ContentValues();
+        values.put(SectionTable.Cols.UUID, section.getSectionId().toString());
+
+
+        return values;
+    }
+
+    public void addSection (Section section){
+        ContentValues values = getContentValues(section);
+
+        mDataBase.insert(SectionTable.NAME, null, values);
+    }
+
+    public void updateSection (Section section){
+        String uuidString = section.getSectionId().toString();
+        ContentValues values = getContentValues(section);
+
+        mDataBase.update(SectionTable.NAME, values, SectionTable.Cols.UUID + " = ?" , new String[] { uuidString });
+    }
+
+    public void addSections (List<Section> sections, UUID conferenceId){
+        mDataBase.delete(SectionTable.NAME, SectionTable.Cols.CONFERENCE_UUID + " = ?", new String[] { conferenceId.toString() });
+
+        ContentValues values;
+
+        for (Section section : sections){
+            values = getContentValues(section);
+            mDataBase.insert(SectionTable.NAME, null, values);
+        }
+    }
+
+    private SectionCursorWrapper querySections (String whereClause, String [] whereArgs){
+        Cursor cursor = mDataBase.query(
+                SectionTable.NAME,
+                null,
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+
+        return new SectionCursorWrapper(cursor);
     }
 }

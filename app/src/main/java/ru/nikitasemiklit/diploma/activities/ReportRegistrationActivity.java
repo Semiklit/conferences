@@ -23,6 +23,7 @@ public class ReportRegistrationActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_registration);
+        setTitle("Регистрация доклада");
 
         mEditTextDateArrive = (EditText) findViewById(R.id.et_report_registration_date_arrive);
 

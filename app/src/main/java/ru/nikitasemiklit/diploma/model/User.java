@@ -6,7 +6,7 @@ import java.util.UUID;
  * Created by nikitasemiklit1 on 23.05.17.
  */
 
-public class Users {
+public class User {
     UUID mUserId;
     String mName;
     String mSurname;
