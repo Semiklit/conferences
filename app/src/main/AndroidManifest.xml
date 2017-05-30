@@ -23,6 +23,7 @@
         <activity android:name=".activities.ReportRegistrationActivity"/>
         <activity android:name=".activities.SingupActivity"/>
         <activity android:name=".activities.TimeTableActivity"/>
+        <activity android:name=".activities.SectionTableActivity"/>
     </application>
 
 </manifest>

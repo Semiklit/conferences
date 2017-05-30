@@ -27,6 +27,8 @@ import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.model.Conference;
 import ru.nikitasemiklit.diploma.model.ConferenceLab;
 
+import static ru.nikitasemiklit.diploma.activities.LoginActivity.API_KEY;
+
 public class ConferenceListActivity extends AppCompatActivity {
 
     public static final String EXTRA_CONFERENCE_ID = "ru.nikitasemiklit.android.susu_conference.conference_id";
@@ -35,6 +37,8 @@ public class ConferenceListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
 
+    private String mToken;
+
     List<Conference> mConferences;
 
     @Override
@@ -42,6 +46,8 @@ public class ConferenceListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conference_list);
         setTitle("Список конференций");
+
+        mToken = getIntent().getStringExtra(LoginActivity.TOKEN);
 
         final ConferenceLab conferenceLab = ConferenceLab.get(getApplicationContext());
         final ConferenceAdapter adapter = new ConferenceAdapter(conferenceLab.getConferences());
@@ -62,27 +68,33 @@ public class ConferenceListActivity extends AppCompatActivity {
                     response = sClient.newCall(request)
                             .execute()
                             .body().string();
-                } catch (IOException e){
-
-                }
-                Log.i("Github Response: ", response);
-                final List<Conference> conferenceList = new ArrayList<>();
-                JsonArray array = new JsonParser().parse(response).getAsJsonArray();
-                for (JsonElement element : array){
-                    Conference conference = new Gson().fromJson(element, Conference.class);
-                    conferenceList.add(conference);
-                }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.setConferences(conferenceList);
-                        adapter.notifyDataSetChanged();
-                        Toast.makeText(ConferenceListActivity.this, "Данные обновлены", Toast.LENGTH_SHORT).show();
+                    final List<Conference> conferenceList = new ArrayList<>();
+                    JsonArray array = new JsonParser().parse(response).getAsJsonArray();
+                    for (JsonElement element : array){
+                        Conference conference = new Gson().fromJson(element, Conference.class);
+                        conferenceList.add(conference);
                     }
-                });
 
-                conferenceLab.addConferences(conferenceList);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.setConferences(conferenceList);
+                            adapter.notifyDataSetChanged();
+                            Toast.makeText(ConferenceListActivity.this, "Данные обновлены", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    conferenceLab.addConferences(conferenceList);
+
+                } catch (IOException e){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ConferenceListActivity.this, "Отсутсвует соединение с инетрентом", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
             }
         };
 

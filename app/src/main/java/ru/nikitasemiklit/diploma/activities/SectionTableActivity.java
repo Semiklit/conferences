@@ -24,23 +24,23 @@ import java.util.UUID;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import ru.nikitasemiklit.diploma.R;
-import ru.nikitasemiklit.diploma.model.Report;
-import ru.nikitasemiklit.diploma.model.ReportLab;
+import ru.nikitasemiklit.diploma.model.Section;
+import ru.nikitasemiklit.diploma.model.SectionLab;
 
 import static ru.nikitasemiklit.diploma.activities.LoginActivity.API_KEY;
 
 /**
- * Created by Никита on 27.05.2017.
+ * Created by nikitasemiklit1 on 31.05.17.
  */
 
-public class TimeTableActivity extends AppCompatActivity {
+public class SectionTableActivity extends AppCompatActivity {
 
-    UUID mSectionID;
+    UUID mConferenceID;
     RecyclerView mRecyclerView;
 
     OkHttpClient sClient;
 
-    public static final String EXTRA_REPORT_ID = "ru.nikitasemiklit.susu_conference.report_id";
+    public static final String EXTRA_SECTION_ID = "ru.nikitasemiklit.susu_conference.section_id";
 
     @Override
     public void onCreate (Bundle savedInstanceState){
@@ -49,10 +49,10 @@ public class TimeTableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_section_table);
         setTitle("Секции");
 
-        mSectionID = (UUID) getIntent().getSerializableExtra(ConferenceListActivity.EXTRA_CONFERENCE_ID);
+        mConferenceID = (UUID) getIntent().getSerializableExtra(ConferenceListActivity.EXTRA_CONFERENCE_ID);
 
-        final ReportLab reportLab = ReportLab.get(getApplicationContext());
-        final ReportAdapter adapter = new ReportAdapter(reportLab.getReports(mSectionID));
+        final SectionLab sectionLab = SectionLab.get(getApplicationContext());
+        final SectionAdapter adapter = new SectionAdapter(sectionLab.getSections(mConferenceID));
 
         Runnable task = new Runnable(){
 
@@ -70,29 +70,29 @@ public class TimeTableActivity extends AppCompatActivity {
                     response = sClient.newCall(request)
                             .execute()
                             .body().string();
-                    final List<Report> reportList = new ArrayList<>();
+                    final List<Section> sectionList = new ArrayList<>();
                     JsonArray array = new JsonParser().parse(response).getAsJsonArray();
                     for (JsonElement element : array){
-                        Report section = new Gson().fromJson(element, Report.class);
-                        reportList.add(section);
+                        Section section = new Gson().fromJson(element, Section.class);
+                        sectionList.add(section);
                     }
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            adapter.setConferences(reportList);
+                            adapter.setConferences(sectionList);
                             adapter.notifyDataSetChanged();
-                            Toast.makeText(TimeTableActivity.this, "Данные обновлены", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SectionTableActivity.this, "Данные обновлены", Toast.LENGTH_SHORT).show();
                         }
                     });
 
-                    reportLab.addReports(reportList, mSectionID);
+                    sectionLab.addSections(sectionList, mConferenceID);
 
                 } catch (IOException e){
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(TimeTableActivity.this, "Отсутсвует соединение с инетрентом", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SectionTableActivity.this, "Отсутсвует соединение с инетрентом", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -103,55 +103,57 @@ public class TimeTableActivity extends AppCompatActivity {
         Thread thread = new Thread(task);
         thread.start();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_report_list);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_section_list);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
     }
 
 
-    private class ReportAdapter extends RecyclerView.Adapter<ReportHolder>{
+    private class SectionAdapter extends RecyclerView.Adapter<SectionHolder>{
 
-        private List<Report> mReports;
+        private List<Section> mSections;
 
-        public ReportAdapter(List<Report> reports){
-            mReports = reports;
+        public SectionAdapter(List<Section> sections){
+            mSections = sections;
         }
 
         @Override
-        public ReportHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public SectionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
             View view  = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
-            return new ReportHolder(view);
+            return new SectionHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(ReportHolder holder, final int position) {
-            final Report report = mReports.get(position);
-            holder.mTitleTextView.setText(report.getTitle());
+        public void onBindViewHolder(SectionHolder holder, final int position) {
+            final Section section = mSections.get(position);
+            holder.mTitleTextView.setText(section.getTitle());
             holder.mTitleTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    
+                    Intent i = new Intent(getApplicationContext(), TimeTableActivity.class);
+                    i.putExtra(EXTRA_SECTION_ID, section.getSectionId());
+                    startActivity(i);
                 }
             });
         }
 
         @Override
         public int getItemCount() {
-            return mReports.size();
+            return mSections.size();
         }
 
-        public void setConferences(List<Report> reports){
-            mReports = reports;
+        public void setConferences(List<Section> sections){
+            mSections = sections;
         }
     }
 
-    private class ReportHolder extends RecyclerView.ViewHolder{
+    private class SectionHolder extends RecyclerView.ViewHolder{
 
         public TextView mTitleTextView;
 
-        public ReportHolder(View itemView) {
+        public SectionHolder(View itemView) {
             super(itemView);
             mTitleTextView = (TextView) itemView;
         }
