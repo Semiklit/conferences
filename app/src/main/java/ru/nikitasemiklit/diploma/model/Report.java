@@ -8,14 +8,14 @@ import java.util.UUID;
  */
 
 public class Report {
-    UUID mReportId;
-    UUID mUserId;
-    UUID mSectionId;
-    String mTitle;
-    String mDesc;
-    Date mArriveDate;
-    Date mLeaveDate;
-    Date mTime;
+    private UUID mReportId;
+    private UUID mUserId;
+    private UUID mSectionId;
+    private String mTitle;
+    private String mDesc;
+    private Date mArriveDate;
+    private Date mLeaveDate;
+    private Date mTime;
 
     public UUID getReportId() {
         return mReportId;

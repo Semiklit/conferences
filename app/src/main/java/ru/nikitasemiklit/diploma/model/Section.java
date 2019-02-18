@@ -7,10 +7,10 @@ import java.util.UUID;
  */
 
 public class Section{
-    UUID mSectionId;
-    UUID mConferenceId;
-    String mTitle;
-    String mDesc;
+    private UUID mSectionId;
+    private UUID mConferenceId;
+    private String mTitle;
+    private String mDesc;
 
     public UUID getSectionId() {
         return mSectionId;
