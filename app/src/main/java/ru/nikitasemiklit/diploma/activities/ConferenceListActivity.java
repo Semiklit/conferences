@@ -1,11 +1,8 @@
 package ru.nikitasemiklit.diploma.activities;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +24,7 @@ import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.model.Conference;
 import ru.nikitasemiklit.diploma.model.ConferenceLab;
 
-import static ru.nikitasemiklit.diploma.activities.LoginActivity.API_KEY;
-
-public class ConferenceListActivity extends AppCompatActivity {
+public class ConferenceListActivity extends Activity {
 
     public static final String EXTRA_CONFERENCE_ID = "ru.nikitasemiklit.android.susu_conference.conference_id";
 
@@ -52,7 +47,7 @@ public class ConferenceListActivity extends AppCompatActivity {
         final ConferenceLab conferenceLab = ConferenceLab.get(getApplicationContext());
         final ConferenceAdapter adapter = new ConferenceAdapter(conferenceLab.getConferences());
 
-        Runnable task = new Runnable(){
+        Runnable task = new Runnable() {
 
             @Override
             public void run() {
@@ -70,7 +65,7 @@ public class ConferenceListActivity extends AppCompatActivity {
                             .body().string();
                     final List<Conference> conferenceList = new ArrayList<>();
                     JsonArray array = new JsonParser().parse(response).getAsJsonArray();
-                    for (JsonElement element : array){
+                    for (JsonElement element : array) {
                         Conference conference = new Gson().fromJson(element, Conference.class);
                         conferenceList.add(conference);
                     }
@@ -86,7 +81,7 @@ public class ConferenceListActivity extends AppCompatActivity {
 
                     conferenceLab.addConferences(conferenceList);
 
-                } catch (IOException e){
+                } catch (IOException e) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -108,18 +103,18 @@ public class ConferenceListActivity extends AppCompatActivity {
     }
 
 
-    private class ConferenceAdapter extends RecyclerView.Adapter<ConferenceHolder>{
+    private class ConferenceAdapter extends RecyclerView.Adapter<ConferenceHolder> {
 
         private List<Conference> mConferences;
 
-        public ConferenceAdapter(List<Conference> conferences){
+        public ConferenceAdapter(List<Conference> conferences) {
             mConferences = conferences;
         }
 
         @Override
         public ConferenceHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-            View view  = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            View view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
             return new ConferenceHolder(view);
         }
 
@@ -142,12 +137,12 @@ public class ConferenceListActivity extends AppCompatActivity {
             return mConferences.size();
         }
 
-        public void setConferences(List<Conference> conferences){
+        public void setConferences(List<Conference> conferences) {
             mConferences = conferences;
         }
     }
 
-    private class ConferenceHolder extends RecyclerView.ViewHolder{
+    private class ConferenceHolder extends RecyclerView.ViewHolder {
 
         public TextView mTitleTextView;
 

@@ -24,6 +24,10 @@
         <activity android:name=".activities.SingupActivity"/>
         <activity android:name=".activities.TimeTableActivity"/>
         <activity android:name=".activities.SectionTableActivity"/>
+        <activity
+            android:name="com.vk.sdk.VKServiceActivity"
+            android:label="ServiceActivity"
+            android:theme="@style/VK.Transparent" />
     </application>
 
 </manifest>

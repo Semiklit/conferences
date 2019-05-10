@@ -1,8 +1,8 @@
 package ru.nikitasemiklit.diploma.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.vk.api.sdk.VK;
 
 import java.io.IOException;
 
@@ -25,9 +26,8 @@ import ru.nikitasemiklit.diploma.R;
  * Created by nikitasemiklit1 on 02.04.17.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
-    public static final String API_KEY = "0c2b48b207ecc820101d610af97c90df2e92ee1dd07b718e3975b8190e5bf93a";
     public static final String URL = "http://35.158.74.167:81/api/v2/user/session";
     public static final String TOKEN = "ru.nikitasemiklit.anroid.susu_conference.session_token";
 
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText mPasswordEditText;
 
     @Override
-    protected void onCreate (Bundle savedInstanseState){
+    protected void onCreate(Bundle savedInstanseState) {
         super.onCreate(savedInstanseState);
 
         setContentView(R.layout.activity_login);
@@ -66,16 +66,14 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         Request request = new Request.Builder()
                                 .url(URL)
-                                .addHeader("X-Dreamfactory-API-Key", API_KEY)
-                                .addHeader("Content-Type" ,"application/json")
                                 .post(RequestBody.create(JSON, json))
                                 .build();
 
                         Response response;
 
-                        try{
+                        try {
                             response = sClient.newCall(request).execute();
-                            if (response.code() == 200){
+                            if (response.code() == 200) {
 
                                 final JsonObject element = new JsonParser().parse(response.body().string()).getAsJsonObject();
                                 final String token = element.getAsJsonPrimitive("session_token").getAsString();
@@ -89,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 });
                             }
-                        } catch (final IOException e){
+                        } catch (final IOException e) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -106,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        VK.initialize(this.getApplicationContext());
+        VK.login(this);
         mSingupButton = (Button) findViewById(R.id.bt_singup_activity);
         mSingupButton.setOnClickListener(new View.OnClickListener() {
             @Override
