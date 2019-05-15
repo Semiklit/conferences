@@ -1,6 +1,5 @@
 package ru.nikitasemiklit.diploma.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +26,6 @@ import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.model.Report;
 import ru.nikitasemiklit.diploma.model.ReportLab;
 
-import static ru.nikitasemiklit.diploma.activities.LoginActivity.API_KEY;
 
 /**
  * Created by Никита on 27.05.2017.

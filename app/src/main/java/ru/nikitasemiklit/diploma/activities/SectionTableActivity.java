@@ -27,7 +27,6 @@ import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.model.Section;
 import ru.nikitasemiklit.diploma.model.SectionLab;
 
-import static ru.nikitasemiklit.diploma.activities.LoginActivity.API_KEY;
 
 /**
  * Created by nikitasemiklit1 on 31.05.17.

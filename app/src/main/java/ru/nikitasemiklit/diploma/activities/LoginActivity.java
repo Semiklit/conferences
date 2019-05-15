@@ -12,6 +12,10 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.vk.api.sdk.VK;
+import com.vk.api.sdk.auth.VKAccessToken;
+import com.vk.api.sdk.auth.VKAuthCallback;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -34,6 +38,7 @@ public class LoginActivity extends Activity {
     static OkHttpClient sClient = new OkHttpClient.Builder().build();
 
     Button mLoginButton;
+    Button mVKLoginButton;
     Button mSingupButton;
     EditText mLoginEditText;
     EditText mPasswordEditText;
@@ -45,10 +50,10 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
         setTitle("Авторизация");
 
-        mLoginEditText = (EditText) findViewById(R.id.et_email);
-        mPasswordEditText = (EditText) findViewById(R.id.et_password);
+        mLoginEditText = findViewById(R.id.et_email);
+        mPasswordEditText = findViewById(R.id.et_password);
 
-        mLoginButton = (Button) findViewById(R.id.bt_login);
+        mLoginButton = findViewById(R.id.bt_login);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,8 +109,16 @@ public class LoginActivity extends Activity {
             }
         });
 
-        VK.initialize(this.getApplicationContext());
-        VK.login(this);
+        mVKLoginButton = findViewById(R.id.bt_login_vk);
+        mVKLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                VK.initialize(LoginActivity.this.getApplicationContext());
+                VK.login(LoginActivity.this);
+            }
+        });
+
+
         mSingupButton = (Button) findViewById(R.id.bt_singup_activity);
         mSingupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,5 +128,22 @@ public class LoginActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!VK.onActivityResult(requestCode, resultCode, data, new VKAuthCallback() {
+            @Override
+            public void onLogin(@NotNull VKAccessToken vkAccessToken) {
+                String token = vkAccessToken.getAccessToken();
+            }
+
+            @Override
+            public void onLoginFailed(int i) {
+
+            }
+        })) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
