@@ -1,14 +1,21 @@
 package ru.nikitasemiklit.diploma.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.vk.api.sdk.VK;
@@ -30,9 +37,9 @@ import ru.nikitasemiklit.diploma.R;
  * Created by nikitasemiklit1 on 02.04.17.
  */
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
-    public static final String URL = "http://35.158.74.167:81/api/v2/user/session";
+    public static final String URL = "http://192.168.0.233:8080/conference_backend_war_exploded/login";
     public static final String TOKEN = "ru.nikitasemiklit.anroid.susu_conference.session_token";
 
     static OkHttpClient sClient = new OkHttpClient.Builder().build();
@@ -40,6 +47,7 @@ public class LoginActivity extends Activity {
     Button mLoginButton;
     Button mVKLoginButton;
     Button mSingupButton;
+    SignInButton mGoogleLoginButton;
     EditText mLoginEditText;
     EditText mPasswordEditText;
 
@@ -118,6 +126,29 @@ public class LoginActivity extends Activity {
             }
         });
 
+        mGoogleLoginButton = findViewById(R.id.bt_google_sign_in);
+        mGoogleLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestServerAuthCode("AIzaSyAxh7RXHVBIMXIu4_RJwB1RxFguUzM2qBg")
+                        .requestEmail()
+                        .requestScopes(new Scope("https://www.googleapis.com/auth/youtube.readonly"))
+                        .build();
+                GoogleApiClient mApiClient = new GoogleApiClient.Builder(LoginActivity.this)
+                        .enableAutoManage(LoginActivity.this, new GoogleApiClient.OnConnectionFailedListener() {
+                            @Override
+                            public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+                            }
+                        })
+                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                        .build();
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mApiClient);
+                startActivityForResult(signInIntent, 12);
+            }
+        });
+
 
         mSingupButton = (Button) findViewById(R.id.bt_singup_activity);
         mSingupButton.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +166,35 @@ public class LoginActivity extends Activity {
         if (!VK.onActivityResult(requestCode, resultCode, data, new VKAuthCallback() {
             @Override
             public void onLogin(@NotNull VKAccessToken vkAccessToken) {
-                String token = vkAccessToken.getAccessToken();
+                final String token = vkAccessToken.getAccessToken();
+                Runnable mAuthenticator = new Runnable() {
+                    @Override
+                    public void run() {
+                        Request request = new Request.Builder()
+                                .url(URL + "?token=" + token)
+                                .get()
+                                .build();
+
+                        Response response;
+
+                        try {
+                            response = sClient.newCall(request).execute();
+                            if (response.code() == 200) {
+                            }
+                        } catch (final IOException e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(LoginActivity.this, "Ошибка авторизации", Toast.LENGTH_SHORT).show();
+                                    Log.e("Server answer: ", e.getMessage());
+                                }
+                            });
+                        }
+                    }
+                };
+
+                Thread thread = new Thread(mAuthenticator);
+                thread.start();
             }
 
             @Override

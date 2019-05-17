@@ -1,71 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical"
-             android:paddingLeft="20dp"
-             android:paddingRight="20dp"
-             android:paddingBottom="20dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginBottom="25dp">
+        android:layout_marginBottom="25dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="55dp">
+
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:id="@+id/et_email"/>
+                android:hint="Email" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="55dp">
+
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Пароль"
-                android:inputType="textPassword"
-                android:id="@+id/et_password"/>
+                android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:layout_width="match_parent"
+            android:id="@+id/bt_login"
+            android:layout_width="216dp"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:text="Вход"
-            android:id="@+id/bt_login"/>
+            android:textColor="@android:color/black" />
+
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/bt_google_sign_in"
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            app:buttonSize="wide"
+            app:colorScheme="dark" />
 
         <Button
             android:id="@+id/bt_login_vk"
-            android:layout_width="match_parent"
+            android:layout_width="216dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
+            android:background="#4680C2"
+            android:drawableStart="@drawable/ic_vk_logo"
+            android:paddingStart="24dp"
             android:text="Вход через ВК"
             android:textColor="@android:color/white" />
-
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/bt_singup_activity"
+        android:layout_width="216dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="bottom">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="Регистрация"
-            android:id="@+id/bt_singup_activity"/>
-    </LinearLayout>
+        android:layout_gravity="bottom|center_horizontal"
+        android:padding="20dp"
+        android:text="Регистрация"
+        android:textColor="@android:color/black" />
 
 
 </FrameLayout>
