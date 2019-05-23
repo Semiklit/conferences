@@ -44,7 +44,7 @@ public class ConferenceListActivity extends Activity {
         setContentView(R.layout.activity_conference_list);
         setTitle("Список конференций");
 
-        mToken = getIntent().getStringExtra(LoginActivity.TOKEN);
+        mToken = "123";
 
         final ConferenceLab conferenceLab = ConferenceLab.get(getApplicationContext());
         final ConferenceAdapter adapter = new ConferenceAdapter(conferenceLab.getConferences());

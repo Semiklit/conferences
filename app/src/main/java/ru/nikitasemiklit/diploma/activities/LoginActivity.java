@@ -4,69 +4,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.vk.api.sdk.VK;
 import com.vk.api.sdk.auth.VKAccessToken;
 import com.vk.api.sdk.auth.VKAuthCallback;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
+import java.util.UUID;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import ru.nikitasemiklit.diploma.App;
 import ru.nikitasemiklit.diploma.R;
+import ru.nikitasemiklit.diploma.responses.LoginResponse;
 
 /**
  * Created by nikitasemiklit1 on 02.04.17.
  */
 
 public class LoginActivity extends AppCompatActivity {
-
-    public static final String URL = "https://conference.semiklit.keenetic.pro/conference_backend_war_exploded/login";
-    private final static String PARAMETER_ACTION = "action";
-    private final static String PARAMETER_TOKEN = "token";
-    private final static String ACTION_GET_CONFERENCE_LIST = "get.conference.list";
-    private final static String ACTION_GET_CONFERENCE_INFO = "get.conference.info";
-    private final static String ACTION_GET_REPORTS_LIST = "get.reports.list";
-    private final static String ACTION_GET_REPORT_INFO = "get.report.info";
-    private final static String ACTION_GET_SECTION_LIST = "get.section.list";
-    private final static String ACTION_GET_SECTION_INFO = "get.section.info";
-    private final static String ACTION_GET_USER_INFO = "get.user.info";
-    private final static String ACTION_AUTH = "auth";
-    private final static String PARAMETER_ID = "id";
-    private final static String PARAMETER_AUTH_METHOD = "auth.method";
-    private final static String PARAMETER_AUTH_EMAIL = "auth.email";
-    private final static String PARAMETER_AUTH_S_NAME = "auth.s_name";
-    private final static String PARAMETER_AUTH_L_NAME = "auth.l_name";
-    private final static String PARAMETER_AUTH_F_NAME = "auth.f_name";
-    private final static String PARAMETER_EXT_SERVICE_ID = "ext_service.id";
-    private final static String PARAMETER_EXT_SERVICE_NAME = "ext_service.name";
-    private final static String PARAMETER_EXT_SERVICE_TOKEN = "ext_service.name";
-    public static final String TOKEN = "ru.nikitasemiklit.anroid.susu_conference.session_token";
-
-    static OkHttpClient sClient = new OkHttpClient.Builder().build();
-
-    Button mLoginButton;
-    Button mVKLoginButton;
-    Button mSingupButton;
-    SignInButton mGoogleLoginButton;
     EditText mLoginEditText;
     EditText mPasswordEditText;
 
@@ -80,64 +45,13 @@ public class LoginActivity extends AppCompatActivity {
         mLoginEditText = findViewById(R.id.et_email);
         mPasswordEditText = findViewById(R.id.et_password);
 
-        mLoginButton = findViewById(R.id.bt_login);
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-                final String json = "{" +
-                        "\"email\" : \"" + mLoginEditText.getText() + "\"," +
-                        "\"password\" : \"" + mPasswordEditText.getText() + "\", " +
-                        "\"duration\" : " + 200 +
-                        "}";
-
-                Runnable mAuthenticator = new Runnable() {
-                    @Override
-                    public void run() {
-                        Request request = new Request.Builder()
-                                .url(URL)
-                                .post(RequestBody.create(JSON, json))
-                                .build();
-
-                        Response response;
-
-                        try {
-                            response = sClient.newCall(request).execute();
-                            if (response.code() == 200) {
-
-                                final JsonObject element = new JsonParser().parse(response.body().string()).getAsJsonObject();
-                                final String token = element.getAsJsonPrimitive("session_token").getAsString();
-
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent i = new Intent(getApplicationContext(), ConferenceListActivity.class);
-                                        i.putExtra(TOKEN, token);
-                                        startActivity(i);
-                                    }
-                                });
-                            }
-                        } catch (final IOException e) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(LoginActivity.this, "Ошибка авторизации", Toast.LENGTH_SHORT).show();
-                                    Log.e("Server answer: ", e.getMessage());
-                                }
-                            });
-                        }
-                    }
-                };
-
-                Thread thread = new Thread(mAuthenticator);
-                thread.start();
             }
         });
 
-        mVKLoginButton = findViewById(R.id.bt_login_vk);
-        mVKLoginButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt_login_vk).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 VK.initialize(LoginActivity.this.getApplicationContext());
@@ -145,8 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mGoogleLoginButton = findViewById(R.id.bt_google_sign_in);
-        mGoogleLoginButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt_google_sign_in).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -169,8 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        mSingupButton = (Button) findViewById(R.id.bt_singup_activity);
-        mSingupButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt_singup_activity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SingupActivity.class);
@@ -181,39 +93,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
         if (!VK.onActivityResult(requestCode, resultCode, data, new VKAuthCallback() {
             @Override
-            public void onLogin(@NotNull VKAccessToken vkAccessToken) {
-                final String token = vkAccessToken.getAccessToken();
-                Runnable mAuthenticator = new Runnable() {
+            public void onLogin(@NotNull final VKAccessToken vkAccessToken) {
+                App.getClient().loginAsVk(vkAccessToken.getUserId(), vkAccessToken.getAccessToken()).enqueue(new Callback<LoginResponse>() {
                     @Override
-                    public void run() {
-                        Request request = new Request.Builder()
-                                .url(URL + "?" + PARAMETER_ACTION + "=" + ACTION_AUTH + "&" + PARAMETER_AUTH_METHOD + "=vk" + "&" + PARAMETER_EXT_SERVICE_TOKEN + "=" + token)
-                                .get()
-                                .build();
-
-                        Response response;
-
-                        try {
-                            response = sClient.newCall(request).execute();
-                            if (response.code() == 200) {
-                            }
-                        } catch (final IOException e) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(LoginActivity.this, "Ошибка авторизации", Toast.LENGTH_SHORT).show();
-                                    Log.e("Server answer: ", e.getMessage());
-                                }
-                            });
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if (response.body().getStatus() == ru.nikitasemiklit.diploma.responses.Response.STATUS_OK) {
+                            UUID token = response.body().getToken();
                         }
                     }
-                };
 
-                Thread thread = new Thread(mAuthenticator);
-                thread.start();
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                    }
+                });
             }
 
             @Override
