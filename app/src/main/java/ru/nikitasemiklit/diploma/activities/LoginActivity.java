@@ -39,7 +39,26 @@ import ru.nikitasemiklit.diploma.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String URL = "http://192.168.0.233:8080/conference_backend_war_exploded/login";
+    public static final String URL = "https://conference.semiklit.keenetic.pro/conference_backend_war_exploded/login";
+    private final static String PARAMETER_ACTION = "action";
+    private final static String PARAMETER_TOKEN = "token";
+    private final static String ACTION_GET_CONFERENCE_LIST = "get.conference.list";
+    private final static String ACTION_GET_CONFERENCE_INFO = "get.conference.info";
+    private final static String ACTION_GET_REPORTS_LIST = "get.reports.list";
+    private final static String ACTION_GET_REPORT_INFO = "get.report.info";
+    private final static String ACTION_GET_SECTION_LIST = "get.section.list";
+    private final static String ACTION_GET_SECTION_INFO = "get.section.info";
+    private final static String ACTION_GET_USER_INFO = "get.user.info";
+    private final static String ACTION_AUTH = "auth";
+    private final static String PARAMETER_ID = "id";
+    private final static String PARAMETER_AUTH_METHOD = "auth.method";
+    private final static String PARAMETER_AUTH_EMAIL = "auth.email";
+    private final static String PARAMETER_AUTH_S_NAME = "auth.s_name";
+    private final static String PARAMETER_AUTH_L_NAME = "auth.l_name";
+    private final static String PARAMETER_AUTH_F_NAME = "auth.f_name";
+    private final static String PARAMETER_EXT_SERVICE_ID = "ext_service.id";
+    private final static String PARAMETER_EXT_SERVICE_NAME = "ext_service.name";
+    private final static String PARAMETER_EXT_SERVICE_TOKEN = "ext_service.name";
     public static final String TOKEN = "ru.nikitasemiklit.anroid.susu_conference.session_token";
 
     static OkHttpClient sClient = new OkHttpClient.Builder().build();
@@ -171,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Request request = new Request.Builder()
-                                .url(URL + "?token=" + token)
+                                .url(URL + "?" + PARAMETER_ACTION + "=" + ACTION_AUTH + "&" + PARAMETER_AUTH_METHOD + "=vk" + "&" + PARAMETER_EXT_SERVICE_TOKEN + "=" + token)
                                 .get()
                                 .build();
 
