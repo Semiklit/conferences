@@ -27,10 +27,6 @@ import ru.nikitasemiklit.diploma.App;
 import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
 
-/**
- * Created by nikitasemiklit1 on 02.04.17.
- */
-
 public class LoginActivity extends AppCompatActivity {
     EditText mLoginEditText;
     EditText mPasswordEditText;
@@ -102,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (response.body().getStatus() == ru.nikitasemiklit.diploma.responses.Response.STATUS_OK) {
                             UUID token = response.body().getToken();
+                            App.setToken(token);
+                            goToMainActivity();
                         }
                     }
 
@@ -119,5 +117,10 @@ public class LoginActivity extends AppCompatActivity {
         })) {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void goToMainActivity() {
+        Intent i = new Intent(this, ConferenceListActivity.class);
+        startActivity(i);
     }
 }

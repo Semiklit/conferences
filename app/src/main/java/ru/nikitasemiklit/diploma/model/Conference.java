@@ -9,10 +9,12 @@ import java.util.UUID;
  */
 
 public class Conference {
-
-    UUID mConferenceId;
-    String mTitle;
-    String mDesc;
+    @SerializedName("conference_id")
+    private UUID mConferenceId;
+    @SerializedName("conference_title")
+    private String mTitle;
+    @SerializedName("conference_desc")
+    private String mDesc;
 
     public UUID getConferenceId() {
         return mConferenceId;

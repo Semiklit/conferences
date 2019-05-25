@@ -1,5 +1,7 @@
 package ru.nikitasemiklit.diploma.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.UUID;
 
 /**
@@ -7,10 +9,14 @@ import java.util.UUID;
  */
 
 public class User {
-    UUID mUserId;
-    String mName;
-    String mSurname;
-    String mPhotoUrl;
+    @SerializedName("user_id")
+    private UUID mUserId;
+    @SerializedName("user_name")
+    private String mName;
+    @SerializedName("user_surname")
+    private String mSurname;
+    @SerializedName("user_photo_url")
+    private String mPhotoUrl;
 
     public UUID getUserId() {
         return mUserId;

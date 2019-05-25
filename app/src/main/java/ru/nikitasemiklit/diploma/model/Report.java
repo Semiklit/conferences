@@ -1,5 +1,7 @@
 package ru.nikitasemiklit.diploma.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,13 +10,21 @@ import java.util.UUID;
  */
 
 public class Report {
+    @SerializedName("report_id")
     private UUID mReportId;
+    @SerializedName("user_id")
     private UUID mUserId;
+    @SerializedName("section_id")
     private UUID mSectionId;
+    @SerializedName("report_title")
     private String mTitle;
+    @SerializedName("report_desc")
     private String mDesc;
+    @SerializedName("report_arrive_date")
     private Date mArriveDate;
+    @SerializedName("report_leave_date")
     private Date mLeaveDate;
+    @SerializedName("report_time")
     private Date mTime;
 
     public UUID getReportId() {

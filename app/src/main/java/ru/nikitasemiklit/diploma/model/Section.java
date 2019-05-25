@@ -1,5 +1,7 @@
 package ru.nikitasemiklit.diploma.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.UUID;
 
 /**
@@ -7,9 +9,13 @@ import java.util.UUID;
  */
 
 public class Section{
+    @SerializedName("section_id")
     private UUID mSectionId;
+    @SerializedName("conference_id")
     private UUID mConferenceId;
+    @SerializedName("title")
     private String mTitle;
+    @SerializedName("desc")
     private String mDesc;
 
     public UUID getSectionId() {
