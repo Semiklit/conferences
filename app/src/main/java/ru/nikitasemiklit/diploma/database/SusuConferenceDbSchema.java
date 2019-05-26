@@ -1,7 +1,5 @@
 package ru.nikitasemiklit.diploma.database;
 
-import java.util.Date;
-
 /**
  * Created by nikitasemiklit1 on 28.05.17.
  */
@@ -14,6 +12,9 @@ public class SusuConferenceDbSchema {
             public static final String UUID = "uuid";
             public static final String TITLE = "title";
             public static final String DESC = "desc";
+            public static final String START_DATE = "start_date";
+            public static final String END_DATE = "end_date";
+            public static final String END_REGISTRAIOTN_DATE = "end_registration_date";
         }
     }
 

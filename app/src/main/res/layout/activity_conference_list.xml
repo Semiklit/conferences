@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ru.nikitasemiklit.diploma.activities.ConferenceListActivity">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_conference_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_conference_list"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager">
 
     </android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|end"
+        android:padding="16dp"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_new_conference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_label="Создать конференцию"
+            fab:fab_size="mini" />
+
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</android.support.design.widget.CoordinatorLayout>

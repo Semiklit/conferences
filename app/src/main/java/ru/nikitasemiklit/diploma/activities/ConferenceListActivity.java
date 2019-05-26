@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -45,12 +48,23 @@ public class ConferenceListActivity extends Activity {
 
             @Override
             public void onFailure(Call<ConferencesResponse> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
 
         RecyclerView mRecyclerView = findViewById(R.id.rv_conference_list);
         mRecyclerView.setAdapter(adapter);
+
+        FloatingActionMenu fabMenu = findViewById(R.id.fab_menu);
+        fabMenu.setClosedOnTouchOutside(true);
+        FloatingActionButton fabTemplate = findViewById(R.id.fab_new_conference);
+        fabTemplate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ConferenceListActivity.this, CreateConferenceActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 

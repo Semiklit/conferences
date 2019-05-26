@@ -33,6 +33,7 @@
             android:name="com.vk.sdk.VKServiceActivity"
             android:label="ServiceActivity"
             android:theme="@style/VK.Transparent" />
+        <activity android:name=".activities.CreateConferenceActivity" />
     </application>
 
 </manifest>

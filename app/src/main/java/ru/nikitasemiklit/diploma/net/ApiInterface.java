@@ -1,12 +1,16 @@
 package ru.nikitasemiklit.diploma.net;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
+import ru.nikitasemiklit.diploma.requests.CreateConfereceRequest;
 import ru.nikitasemiklit.diploma.responses.ConferencesResponse;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
 import ru.nikitasemiklit.diploma.responses.ReportsResponse;
+import ru.nikitasemiklit.diploma.responses.Response;
 import ru.nikitasemiklit.diploma.responses.SectionsResponse;
 
 public interface ApiInterface {
@@ -20,6 +24,8 @@ public interface ApiInterface {
     String ACTION_GET_SECTION_LIST = "get.section.list";
     String ACTION_GET_SECTION_INFO = "get.section.info";
     String ACTION_GET_USER_INFO = "get.user.info";
+    String ACTION_CREATE_CONFERENCE = "create.conference";
+    String ACTION_CREATE_REPORT = "create.report";
     String ACTION_AUTH = "auth";
     String PARAMETER_ID = "id";
     String PARAMETER_CONFERENCE_ID = "conference.id";
@@ -34,6 +40,7 @@ public interface ApiInterface {
     String PARAMETER_EXT_SERVICE_TOKEN = "ext_service.name";
 
     String PATH_LOGIN = "conference_backend_war_exploded/login";
+    String PATH_CREATE = "conference_backend_war_exploded/create";
     String PATH_DATA = "conference_backend_war_exploded/data";
 
     @GET(PATH_LOGIN)
@@ -56,6 +63,11 @@ public interface ApiInterface {
     @GET(PATH_DATA)
     Call<ConferencesResponse> getConferences(@Header("Authorization") String token,
                                              @Query(PARAMETER_ACTION) String action);
+
+    @POST(PATH_CREATE)
+    Call<Response> createConference(@Header("Authorization") String token,
+                                    @Query(PARAMETER_ACTION) String action,
+                                    @Body CreateConfereceRequest createConfereceRequest);
 
 
 }

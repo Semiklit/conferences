@@ -7,10 +7,7 @@ import java.util.UUID;
 
 import ru.nikitasemiklit.diploma.database.SusuConferenceDbSchema.ConferenceTable;
 import ru.nikitasemiklit.diploma.model.Conference;
-
-/**
- * Created by nikitasemiklit1 on 28.05.17.
- */
+import ru.nikitasemiklit.diploma.utils.DateUtil;
 
 public class ConferenceCursorWrapper extends CursorWrapper {
 
@@ -18,13 +15,12 @@ public class ConferenceCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
-    public Conference getConference(){
-        Conference conference = new Conference();
-
-        conference.setConferenceId(UUID.fromString(getString(getColumnIndex(ConferenceTable.Cols.UUID))));
-        conference.setTitle(getString(getColumnIndex(ConferenceTable.Cols.TITLE)));
-        conference.setDesc(getString(getColumnIndex(ConferenceTable.Cols.DESC)));
-
-        return conference;
+    public Conference getConference() {
+        return new Conference(UUID.fromString(getString(getColumnIndex(ConferenceTable.Cols.UUID))),
+                getString(getColumnIndex(ConferenceTable.Cols.TITLE)),
+                getString(getColumnIndex(ConferenceTable.Cols.DESC)),
+                DateUtil.parseDate(getString(getColumnIndex(ConferenceTable.Cols.START_DATE))),
+                DateUtil.parseDate(getString(getColumnIndex(ConferenceTable.Cols.END_DATE))),
+                DateUtil.parseDate(getString(getColumnIndex(ConferenceTable.Cols.END_REGISTRAIOTN_DATE))));
     }
 }

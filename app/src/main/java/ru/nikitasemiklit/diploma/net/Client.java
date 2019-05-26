@@ -10,9 +10,12 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.nikitasemiklit.diploma.App;
+import ru.nikitasemiklit.diploma.requests.CreateConfereceRequest;
 import ru.nikitasemiklit.diploma.responses.ConferencesResponse;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
 import ru.nikitasemiklit.diploma.responses.ReportsResponse;
+import ru.nikitasemiklit.diploma.responses.Response;
 import ru.nikitasemiklit.diploma.responses.SectionsResponse;
 
 public class Client {
@@ -21,6 +24,7 @@ public class Client {
 
     public Client() {
         Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .setLenient()
                 .create();
 
@@ -54,6 +58,10 @@ public class Client {
 
     public Call<ReportsResponse> getReports(UUID token, UUID sectionID) {
         return apiInterface.getReports(token.toString(), ApiInterface.ACTION_GET_REPORTS_LIST, sectionID.toString());
+    }
+
+    public Call<Response> createConferce(CreateConfereceRequest request) {
+        return apiInterface.createConference(App.getToken().toString(), ApiInterface.ACTION_CREATE_CONFERENCE, request);
     }
 
 }

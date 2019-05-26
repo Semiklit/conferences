@@ -8,7 +8,6 @@ import ru.nikitasemiklit.diploma.database.SusuConferenceDbSchema.ConferenceTable
 import ru.nikitasemiklit.diploma.database.SusuConferenceDbSchema.ReportTable;
 import ru.nikitasemiklit.diploma.database.SusuConferenceDbSchema.SectionTable;
 import ru.nikitasemiklit.diploma.database.SusuConferenceDbSchema.UserTable;
-import ru.nikitasemiklit.diploma.model.Section;
 
 /**
  * Created by nikitasemiklit1 on 28.05.17.
@@ -28,7 +27,11 @@ public class SusuConferenceBaseHelper extends SQLiteOpenHelper{
                 " _id integer primary key autoincrement, " +
                 ConferenceTable.Cols.UUID + ", " +
                 ConferenceTable.Cols.TITLE + ", " +
-                ConferenceTable.Cols.DESC + ")"
+                ConferenceTable.Cols.DESC + ", " +
+                ConferenceTable.Cols.START_DATE + ", " +
+                ConferenceTable.Cols.END_DATE + ", " +
+                ConferenceTable.Cols.END_REGISTRAIOTN_DATE +
+                ")"
         );
 
         db.execSQL("create table " + ReportTable.NAME + "(" +
