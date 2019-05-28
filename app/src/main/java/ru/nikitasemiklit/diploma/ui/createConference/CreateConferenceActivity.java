@@ -1,14 +1,20 @@
-package ru.nikitasemiklit.diploma.activities;
+package ru.nikitasemiklit.diploma.ui.createConference;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,15 +33,17 @@ import ru.nikitasemiklit.diploma.App;
 import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.model.Conference;
 import ru.nikitasemiklit.diploma.model.Section;
-import ru.nikitasemiklit.diploma.requests.CreateConfereceRequest;
+import ru.nikitasemiklit.diploma.requests.CreateConferenceRequest;
 import ru.nikitasemiklit.diploma.responses.Response;
+import ru.nikitasemiklit.diploma.widgets.SectionView;
 
 public class CreateConferenceActivity extends AppCompatActivity {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
             "dd.MM.yy", Locale.getDefault());
 
-    RecyclerView sectionsRecycler;
+    LinearLayout sectionsLayout;
+    LinearLayout addSection;
     EditText etTitle;
     EditText etDesc;
     TextView tvStart;
@@ -52,11 +60,73 @@ public class CreateConferenceActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_conference);
-        sectionsRecycler = findViewById(R.id.recycler_sections);
+        setTitle("Создание конференции");
+        sectionsLayout = findViewById(R.id.sections_container);
+        addSection = findViewById(R.id.add_section_layout);
+        addSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final View dialogLayout = View.inflate(v.getContext(), R.layout.layout_dialog_add_section, null);
+                final EditText title = dialogLayout.findViewById(R.id.title);
+                final EditText desc = dialogLayout.findViewById(R.id.desc);
+                final AlertDialog dialog = new AlertDialog.Builder(v.getContext(), R.style.PB_AlertDialog_Base)
+                        .setTitle("Добавление секции")
+                        .setView(dialogLayout)
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton("Добавить", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                addSection(new Section(title.getText().toString(), desc.getText().toString()));
+                            }
+                        })
+                        .create();
+                if (dialog.getWindow() != null) {
+                    dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                }
+                dialog.show();
+                final Button okButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                okButton.setEnabled(false);
+                dialog.setCanceledOnTouchOutside(false);
+                title.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(title.getText().length() >= 1);
+                    }
+                });
+
+                desc.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(desc.getText().length() >= 1);
+                    }
+                });
+            }
+        });
         etTitle = findViewById(R.id.conference_title);
         etDesc = findViewById(R.id.conference_desc);
         tvStart = findViewById(R.id.date_conference_start);
-        tvStart.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.date_conference_start_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
@@ -86,7 +156,7 @@ public class CreateConferenceActivity extends AppCompatActivity {
             }
         });
         tvEnd = findViewById(R.id.date_conference_end);
-        tvEnd.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.date_conference_end_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
@@ -116,7 +186,7 @@ public class CreateConferenceActivity extends AppCompatActivity {
             }
         });
         tvRegistrationEnd = findViewById(R.id.date_end_registration);
-        tvRegistrationEnd.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.date_end_registration_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
@@ -165,8 +235,8 @@ public class CreateConferenceActivity extends AppCompatActivity {
                     Conference conference = new Conference(etTitle.getText().toString(),
                             etDesc.getText().toString(),
                             conferenceStart, conferenceEnd, conferenceRegistrationEnd);
-                    CreateConfereceRequest createConfereceRequest = new CreateConfereceRequest(conference, sectionList);
-                    App.getClient().createConferce(createConfereceRequest).enqueue(new Callback<Response>() {
+                    CreateConferenceRequest createConferenceRequest = new CreateConferenceRequest(conference, sectionList);
+                    App.getClient().createConferce(App.getToken(), createConferenceRequest).enqueue(new Callback<Response>() {
                         @Override
                         public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                             if (response.body().getStatus() == Response.STATUS_OK) {
@@ -200,14 +270,14 @@ public class CreateConferenceActivity extends AppCompatActivity {
     private void setStartDate(Date date) {
         conferenceStart = date;
         if (date != null) {
-            tvStart.setText("C " + dateFormat.format(date));
+            tvStart.setText(dateFormat.format(date));
         }
     }
 
     private void setEndDate(Date date) {
         conferenceEnd = date;
         if (date != null) {
-            tvEnd.setText("По " + dateFormat.format(date));
+            tvEnd.setText(dateFormat.format(date));
         }
     }
 
@@ -216,5 +286,12 @@ public class CreateConferenceActivity extends AppCompatActivity {
         if (date != null) {
             tvRegistrationEnd.setText(dateFormat.format(date));
         }
+    }
+
+    private void addSection(Section section) {
+        SectionView view = new SectionView(this, null);
+        view.setSection(section);
+        sectionsLayout.addView(view);
+        sectionList.add(section);
     }
 }

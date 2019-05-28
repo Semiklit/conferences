@@ -1,4 +1,4 @@
-package ru.nikitasemiklit.diploma.activities;
+package ru.nikitasemiklit.diploma.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import java.util.UUID;
 import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.model.Section;
 import ru.nikitasemiklit.diploma.model.SectionLab;
+import ru.nikitasemiklit.diploma.ui.fragments.ConferenceListFragment;
 
 /**
  * Created by nikitasemiklit1 on 02.04.17.
@@ -32,7 +33,7 @@ public class ReportRegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_registration);
         setTitle("Регистрация доклада");
 
-        final UUID conferenceId = (UUID) getIntent().getSerializableExtra(ConferenceListActivity.EXTRA_CONFERENCE_ID);
+        final UUID conferenceId = (UUID) getIntent().getSerializableExtra(ConferenceListFragment.EXTRA_CONFERENCE_ID);
 
         final SectionLab mSectionLab = SectionLab.get(getApplicationContext());
         final List<Section> mSections = mSectionLab.getSections(conferenceId);

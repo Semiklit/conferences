@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_conference_list"
+        android:icon="@drawable/ic_timeline"
+        android:title="Конференции" />
+    <item
+        android:id="@+id/action_calendar"
+        android:icon="@drawable/ic_calendar"
+        android:title="Календарь" />
+    <item
+        android:id="@+id/action_person_info"
+        android:icon="@drawable/ic_avatar"
+        android:title="Личный кабинет" />
+</menu>

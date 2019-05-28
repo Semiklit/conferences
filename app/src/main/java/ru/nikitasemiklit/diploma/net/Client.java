@@ -10,8 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.nikitasemiklit.diploma.App;
-import ru.nikitasemiklit.diploma.requests.CreateConfereceRequest;
+import ru.nikitasemiklit.diploma.requests.CreateConferenceRequest;
 import ru.nikitasemiklit.diploma.responses.ConferencesResponse;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
 import ru.nikitasemiklit.diploma.responses.ReportsResponse;
@@ -49,19 +48,19 @@ public class Client {
     }
 
     public Call<SectionsResponse> getSections(UUID token, UUID conferenceID) {
-        return apiInterface.getSections(token.toString(), ApiInterface.ACTION_GET_SECTION_LIST, conferenceID.toString());
+        return apiInterface.getSections(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_SECTION_LIST, conferenceID.toString());
     }
 
     public Call<ConferencesResponse> getConferences(UUID token) {
-        return apiInterface.getConferences(token.toString(), ApiInterface.ACTION_GET_CONFERENCE_LIST);
+        return apiInterface.getConferences(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_CONFERENCE_LIST);
     }
 
     public Call<ReportsResponse> getReports(UUID token, UUID sectionID) {
-        return apiInterface.getReports(token.toString(), ApiInterface.ACTION_GET_REPORTS_LIST, sectionID.toString());
+        return apiInterface.getReports(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_REPORTS_LIST, sectionID.toString());
     }
 
-    public Call<Response> createConferce(CreateConfereceRequest request) {
-        return apiInterface.createConference(App.getToken().toString(), ApiInterface.ACTION_CREATE_CONFERENCE, request);
+    public Call<Response> createConferce(UUID token, CreateConferenceRequest request) {
+        return apiInterface.createConference(token != null ? token.toString() : "none", ApiInterface.ACTION_CREATE_CONFERENCE, request);
     }
 
 }

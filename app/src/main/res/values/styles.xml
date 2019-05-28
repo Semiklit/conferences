@@ -6,6 +6,323 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textAppearance">@style/PB.TextAppearance</item>
+        <item name="android:textViewStyle">@style/PB.TextView</item>
+        <item name="android:editTextStyle">@style/PB.EditText</item>
+        <item name="android:spinnerStyle">@style/PB.Spinner</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="TabTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:textViewStyle">@style/PB.TextView.Tab</item>
+    </style>
+
+    <style name="PB" />
+
+    <style name="PB.ToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorSecondary">@color/toolbar_icon_color</item>
+        <item name="android:textColorPrimary">@color/toolbar_icon_color</item>
+    </style>
+
+    <style name="PB.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:background">@color/toolbar_background</item>
+        <item name="android:theme">@style/PB.ToolbarTheme</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="contentInsetStart">@dimen/item_keyline_padding</item>
+    </style>
+
+    <style name="PB.Toolbar.WithElevation" />
+
+    <!-- layouts -->
+
+    <style name="PB.Layout" />
+
+    <style name="PB.Layout.Item">
+        <item name="android:minHeight">@dimen/min_click_height</item>
+        <item name="android:paddingLeft">@dimen/item_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/item_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/item_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/item_padding_vertical</item>
+    </style>
+
+    <!-- Text views -->
+
+    <style name="PB.TextView" parent="android:Widget.TextView">
+        <item name="android:textAppearance">@style/PB.TextAppearance.Small</item>
+    </style>
+
+    <style name="PB.TextView.Tab">
+        <item name="android:textColor">@color/tab_text</item>
+    </style>
+
+    <style name="PB.TextView.ItemHeader">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
+        <item name="android:textAppearance">@style/PB.TextAppearance</item>
+    </style>
+
+    <style name="PB.TextView.SingleLineListItem">
+        <item name="android:textAppearance">@style/PB.TextAppearance.Medium</item>
+        <item name="android:minHeight">@dimen/min_click_height</item>
+        <item name="android:paddingLeft">@dimen/item_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/item_padding_horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:paddingTop">@dimen/item_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/item_padding_vertical</item>
+    </style>
+
+    <!-- Edit text views -->
+    <style name="PB.EditText" parent="Base.V7.Widget.AppCompat.EditText">
+        <item name="android:imeOptions">flagNoExtractUi</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!-- Spinners -->
+    <style name="PB.Spinner" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:layout_marginTop">@dimen/item_spinner_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/item_spinner_margin_bottom</item>
+    </style>
+
+    <style name="PB.Spinner.WithMargins">
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="PB.SpinnerDivider">
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/spinner_divider_color</item>
+        <item name="android:layout_marginTop">@dimen/item_spinner_divider_padding_top</item>
+    </style>
+
+    <!-- TextAppearence -->
+    <style name="PB.TextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+    </style>
+
+    <style name="PB.TextAppearance.VerySmall" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+    </style>
+
+    <style name="PB.TextHeaderAppearance.VerySmall" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/text_color_header</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="PB.TextWarningAppearance.VerySmall" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/text_color_error</item>
+    </style>
+
+    <style name="PB.TextSecondaryAppearance.VerySmall" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
+    </style>
+
+    <style name="PB.TextBoldMedium" parent="PB.TextAppearance.Medium">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="PB.TextBoldSmall" parent="PB.TextAppearance.Small">
+        <item name="android:textColor">@color/text_color_secondary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="PB.TextSecondaryBoldVerySmall" parent="PB.TextSecondaryAppearance.VerySmall">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="PB.TextAppearance.Small" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+    </style>
+
+    <style name="PB.TextSecondaryAppearance.Small" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
+    </style>
+
+    <style name="PB.TextAppearance.Small.Inverse" parent="TextAppearance.AppCompat.Small.Inverse">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:textColorPrimaryInverse</item>
+    </style>
+
+    <style name="PB.TextAppearance.MiddleMedium" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+    </style>
+
+    <style name="PB.TextBoldTitle" parent="PB.TextAppearance.MiddleMedium">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="PB.TextSecondaryMonospace" parent="PB.TextSecondaryAppearance.MiddleMedium">
+        <item name="android:fontFamily">serif-monospace</item>
+    </style>
+
+    <style name="PB.TextSecondaryAppearance.MiddleMedium" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
+    </style>
+
+    <style name="PB.TextAppearance.Medium" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+    </style>
+
+    <style name="PB.TextAppearance.Large" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+    </style>
+
+    <style name="PB.TextAppearance.ItemTitle" parent="PB.TextAppearance">
+        <item name="android:textColor">@color/secondary_text_default_material_light</item>
+    </style>
+
+    <style name="PB.TextAppearance.ItemValue" parent="PB.TextAppearance"></style>
+
+    <style name="PB.TextAppearance.Tab" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="PB.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/alertdialog_text_color</item>
+        <item name="android:textColorAlertDialogListItem">@color/alertdialog_primary</item>
+        <item name="colorAccent">@color/alertdialog_primary</item>
+        <item name="colorPrimary">@color/alertdialog_primary</item>
+        <item name="colorControlNormal">@color/alertdialog_primary</item>
+        <item name="colorControlActivated">@color/alertdialog_primary</item>
+        <item name="colorControlHighlight">@color/alertdialog_highlight</item>
+        <item name="colorSwitchThumbNormal">@color/alertdialog_primary</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+        <item name="android:windowBackground">@color/alertdialog_background</item>
+
+    </style>
+
+    <style name="PB.AlertDialog.Limit.Choice" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/alertdialog_text_color</item>
+        <item name="android:textColorSecondary">@color/alertdialog_primary</item>
+        <item name="android:windowTitleStyle">@style/PB.AlertDialog.Limit.Choice.Title</item>
+        <item name="android:checkedTextViewStyle">@style/PB.AlertDialog.Limit.Choice.Items</item>
+        <item name="android:textColorAlertDialogListItem">@color/alertdialog_primary</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+        <item name="android:windowBackground">@color/alertdialog_background</item>
+        <item name="colorAccent">@color/alertdialog_primary</item>
+        <item name="colorPrimary">@color/alertdialog_primary</item>
+        <item name="colorControlNormal">@color/alertdialog_primary</item>
+        <item name="colorControlActivated">@color/alertdialog_primary</item>
+        <item name="colorControlHighlight">@color/alertdialog_highlight</item>
+        <item name="colorSwitchThumbNormal">@color/alertdialog_primary</item>
+        <item name="android:checkBoxPreferenceStyle">
+            @style/PB.AlertDialog.Limit.Choice.Items.RadioButton
+        </item>
+        <item name="android:radioButtonStyle">@style/PB.AlertDialog.Limit.Choice.Items.RadioButton
+        </item>
+    </style>
+
+    <style name="PB.AlertDialog.Base" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/alertdialog_text_color</item>
+        <item name="android:textColorSecondary">@color/alertdialog_primary</item>
+        <item name="android:windowTitleStyle">@style/PB.AlertDialog.Limit.Choice.Title</item>
+        <item name="android:checkedTextViewStyle">@style/PB.AlertDialog.Limit.Choice.Items</item>
+        <item name="android:textColorAlertDialogListItem">@color/alertdialog_primary</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+        <item name="android:windowBackground">@color/alertdialog_background</item>
+        <item name="colorAccent">@color/alertdialog_primary</item>
+        <item name="colorPrimary">@color/alertdialog_primary</item>
+        <item name="colorControlNormal">@color/alertdialog_primary</item>
+        <item name="colorControlActivated">@color/alertdialog_primary</item>
+        <item name="colorControlHighlight">@color/alertdialog_highlight</item>
+        <item name="colorSwitchThumbNormal">@color/alertdialog_primary</item>
+        <item name="android:checkBoxPreferenceStyle">
+            @style/PB.AlertDialog.Limit.Choice.Items.RadioButton
+        </item>
+        <item name="android:radioButtonStyle">@style/PB.AlertDialog.Limit.Choice.Items.RadioButton
+        </item>
+    </style>
+
+    <style name="PB.AlertDialog.Limit.Choice.Title">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="PB.AlertDialog.Limit.Choice.Items">
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:selectableItemBackground">@color/colorPrimary</item>
+    </style>
+
+    <style name="PB.AlertDialog.Limit.Choice.Items.RadioButton">
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:colorBackground">@color/alertdialog_primary</item>
+    </style>
+
+    <style name="PB.AlertDialog.VCard" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/alertdialog_text_color</item>
+        <item name="android:textColorSecondary">@color/alertdialog_primary</item>
+        <item name="android:windowTitleStyle">@style/PB.AlertDialog.Limit.Choice.Title</item>
+        <item name="android:checkedTextViewStyle">@style/PB.AlertDialog.Limit.Choice.Items</item>
+        <item name="android:textColorAlertDialogListItem">@color/alertdialog_primary</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+        <item name="android:windowBackground">@color/alertdialog_background</item>
+        <item name="colorAccent">@color/alertdialog_primary</item>
+        <item name="colorPrimary">@color/alertdialog_primary</item>
+        <item name="colorControlNormal">@color/alertdialog_primary</item>
+        <item name="colorControlActivated">@color/alertdialog_primary</item>
+        <item name="colorControlHighlight">@color/alertdialog_highlight</item>
+        <item name="colorSwitchThumbNormal">@color/alertdialog_primary</item>
+        <item name="android:checkBoxPreferenceStyle">
+            @style/PB.AlertDialog.Limit.Choice.Items.RadioButton
+        </item>
+        <item name="android:radioButtonStyle">@style/PB.AlertDialog.Limit.Choice.Items.RadioButton
+        </item>
+    </style>
+
+    <style name="PB.Spinner.WithOutPaddings" parent="@android:style/Widget.TextView.SpinnerItem">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+
+    <style name="PB.ListViewSeparatorStyle">
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/listview_separator_background</item>
+    </style>
+
+    <style name="Splash.Progressbar.Style" parent="TextAppearance.AppCompat.Large">
+        <item name="colorAccent">@color/accent_color</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Splash.Background" parent="Base.TextAppearance.AppCompat">
+        <item name="android:background">@android:color/white</item>
     </style>
 
 </resources>

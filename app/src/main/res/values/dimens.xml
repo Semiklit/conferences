@@ -1,0 +1,119 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+    <dimen name="item_padding_vertical">10dp</dimen>
+    <dimen name="item_padding_vertical_small">5dp</dimen>
+    <dimen name="item_padding_horizontal">14dp</dimen>
+    <dimen name="item_padding_horizontal_small">8dp</dimen>
+    <dimen name="item_keyline_padding">72dp</dimen>
+    <dimen name="item_edit_padding_bottom">4dp</dimen>
+    <dimen name="min_click_height">48dp</dimen>
+    <dimen name="material_edit_text_height">55dp</dimen>
+    <!-- drawer -->
+    <dimen name="navigation_drawer_header_height">32dp</dimen>
+    <dimen name="navigation_drawer_logo_padding">16dp</dimen>
+    <dimen name="navigation_drawer_width">270dp</dimen>
+    <dimen name="navigation_drawer_count_horizontal_padding">4dp</dimen>
+    <dimen name="navigation_drawer_count_min_width">18dp</dimen>
+    <dimen name="navigation_drawer_count_padding_bottom">1dp</dimen>
+    <!-- tabs -->
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="title_value_edit_action_margin_left">4dp</dimen>
+    <dimen name="title_value_edit_mandatory_padding_right">4dp</dimen>
+    <dimen name="edit_item_vertical_margin">8dp</dimen>
+    <dimen name="item_spinner_margin_top">3dp</dimen>
+    <dimen name="item_spinner_margin_bottom">10dp</dimen>
+    <dimen name="item_spinner_divider_padding_top">5dp</dimen>
+    <!-- login -->
+    <dimen name="login_vertical_margin">30dp</dimen>
+    <dimen name="login_horizontal_margin">40dp</dimen>
+    <dimen name="login_logo_margin_top">6dp</dimen>
+    <dimen name="login_edit_margin_top">24dp</dimen>
+    <!-- complete -->
+    <dimen name="complete_btn_width">224dp</dimen>
+    <!--account list -->
+    <dimen name="account_shape_size">44dp</dimen>
+    <dimen name="account_shape_text_size">24sp</dimen>
+    <dimen name="account_sticky_header_margin_top">14dp</dimen>
+    <dimen name="account_sticky_header_margin_bottom">4dp</dimen>
+    <dimen name="account_sticky_header_padding_left">20dp</dimen>
+    <dimen name="account_shape_padding_horizontal">14dp</dimen>
+    <dimen name="account_title_padding_left">72dp</dimen>
+    <!--accoint -->
+    <dimen name="account_padding_top">8dp</dimen>
+    <!--account info -->
+    <dimen name="account_info_padding_bottom">14dp</dimen>
+    <dimen name="account_info_padding_top">17dp</dimen>
+    <!--limit list -->
+    <dimen name="limit_list_padding_left">16dp</dimen>
+    <dimen name="limit_list_padding_top">8dp</dimen>
+    <dimen name="limit_list_shape_height">4dp</dimen>
+    <!-- card info -->
+    <dimen name="card_info_img_size">44dp</dimen>
+    <dimen name="card_info_img_size_small">40dp</dimen>
+    <!--************************ Sticky Headers ******************************-->
+    <!-- GeneralPaymentTemplate -->
+    <dimen name="payment_template_sticky_header_height">33dp</dimen>
+    <dimen name="payment_template_sticky_header_margin_left">72dp</dimen>
+    <dimen name="payment_template_sticky_header_margin_top">14dp</dimen>
+    <dimen name="payment_template_sticky_header_margin_bottom">4dp</dimen>
+    <!--************************ Lists ******************************-->
+    <!-- Payment -->
+    <dimen name="payment_vendor_information_height">72dp</dimen>
+    <dimen name="payment_vendor_logo_width">72dp</dimen>
+    <dimen name="payment_vendor_logo_height">72dp</dimen>
+    <dimen name="payment_vendor_logo_padding_start">16dp</dimen>
+    <dimen name="payment_vendor_logo_padding_end">16dp</dimen>
+    <dimen name="payment_vendor_logo_padding_top">16dp</dimen>
+    <dimen name="payment_vendor_logo_padding_bottom">16dp</dimen>
+    <dimen name="payment_edit_height">24dp</dimen>
+    <dimen name="payment_edit_width">24dp</dimen>
+    <dimen name="payment_edit_padding">3dp</dimen>
+    <dimen name="payment_edit_end_margin">11dp</dimen>
+    <dimen name="payment_edit_start_margin">11dp</dimen>
+    <dimen name="payment_schedule_height">72dp</dimen>
+    <dimen name="payment_schedule_text_left_margin">72dp</dimen>
+    <dimen name="payment_amount_height">80dp</dimen>
+    <dimen name="payment_amount_layout_left_margin">72dp</dimen>
+    <!-- GeneralPaymentTemplate -->
+    <dimen name="payment_template_list_item_height">72dp</dimen>
+    <dimen name="payment_template_list_logo_width">72dp</dimen>
+    <dimen name="payment_template_list_logo_height">72dp</dimen>
+    <dimen name="payment_template_list_logo_padding_start">16dp</dimen>
+    <dimen name="payment_template_list_logo_padding_end">16dp</dimen>
+    <dimen name="payment_template_list_logo_padding_top">16dp</dimen>
+    <dimen name="payment_template_list_logo_padding_bottom">16dp</dimen>
+    <dimen name="payment_template_list_item_margin_left">72dp</dimen>
+    <dimen name="payment_template_chevron_height">24dp</dimen>
+    <dimen name="payment_template_chevron_width">24dp</dimen>
+    <dimen name="payment_template_chevron_right_margin">8dp</dimen>
+    <!-- Vendor -->
+    <dimen name="vendor_list_item_margin_left">72dp</dimen>
+    <!-- Vendor group -->
+    <dimen name="vendor_group_list_item_margin_left">72dp</dimen>
+    <!-- Common dimensions -->
+    <dimen name="common_form_row_height">72dp</dimen>
+    <dimen name="common_form_extended_row_height">94dp</dimen>
+    <dimen name="common_recycler_row_height">64dp</dimen>
+    <dimen name="common_recycler_item_icon_height_width">40dp</dimen>
+    <dimen name="common_recycler_item_icon_start_end_margin">16dp</dimen>
+    <dimen name="common_standard_padding">16dp</dimen>
+    <dimen name="common_standard_margin">16dp</dimen>
+    <dimen name="common_recycler_item_icon_top_bottom">12dp</dimen>
+    <dimen name="common_account_shape_size">40dp</dimen>
+    <dimen name="common_account_shape_text_size">24sp</dimen>
+    <!-- Transfer dimensions -->
+    <dimen name="transfer_form_height">84dp</dimen>
+    <dimen name="fragment_padding">12dp</dimen>
+    <dimen name="keyboard_underline_padding">4dp</dimen>
+    <dimen name="pin_keyboard_default_text_size">24sp</dimen>
+    <dimen name="pin_header_label_size">18sp</dimen>
+    <dimen name="pinputview_default_text_size">24sp</dimen>
+    <dimen name="pinputview_default_char_padding">6dp</dimen>
+    <dimen name="pin_view_progressbar_size">20dp</dimen>
+    <dimen name="toolbar_textview_width">248dp</dimen>
+    <dimen name="toolbar_textview_marging_left">56dp</dimen>
+    <!-- Geo dimensions -->
+    <dimen name="margin_geo_filters_submenu">30dp</dimen>
+</resources>

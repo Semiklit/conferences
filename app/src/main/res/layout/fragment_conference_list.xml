@@ -2,10 +2,8 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ru.nikitasemiklit.diploma.activities.ConferenceListActivity">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_conference_list"
@@ -29,7 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_label="Создать конференцию"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            fab:icon="@drawable/ic_meeting" />
 
 
     </com.github.clans.fab.FloatingActionMenu>

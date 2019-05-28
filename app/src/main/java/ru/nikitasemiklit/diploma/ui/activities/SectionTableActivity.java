@@ -1,4 +1,4 @@
-package ru.nikitasemiklit.diploma.activities;
+package ru.nikitasemiklit.diploma.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.model.Section;
 import ru.nikitasemiklit.diploma.model.SectionLab;
 import ru.nikitasemiklit.diploma.responses.SectionsResponse;
+import ru.nikitasemiklit.diploma.ui.fragments.ConferenceListFragment;
 
 public class SectionTableActivity extends AppCompatActivity {
 
@@ -37,7 +38,7 @@ public class SectionTableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_section_table);
         setTitle("Секции");
 
-        mConferenceID = (UUID) getIntent().getSerializableExtra(ConferenceListActivity.EXTRA_CONFERENCE_ID);
+        mConferenceID = (UUID) getIntent().getSerializableExtra(ConferenceListFragment.EXTRA_CONFERENCE_ID);
 
         final SectionLab sectionLab = SectionLab.get(getApplicationContext());
         final SectionAdapter adapter = new SectionAdapter(sectionLab.getSections(mConferenceID));

@@ -1,44 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="top"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingBottom="20dp">
+        android:paddingBottom="90dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_conference_detail_title"
-        android:textSize="30dp"
-        android:paddingBottom="10dp"/>
+        <TextView
+            android:id="@+id/tv_conference_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:textSize="30dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_conference_detail_desc"/>
+        <TextView
+            android:id="@+id/tv_conference_detail_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Расписание"
-        android:id="@+id/bt_conference_detail_timetable"/>
+        <Button
+            android:id="@+id/bt_conference_detail_timetable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Расписание" />
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:src="@android:drawable/ic_input_add"
-        android:id="@+id/bt_conference_detail_new_report"
-        android:layout_margin="20dp" />
 
-</FrameLayout>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|end"
+        android:padding="16dp"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_new_conference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_label="Зарегистрировать доклад"
+            fab:fab_size="mini" />
+
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</android.support.design.widget.CoordinatorLayout>

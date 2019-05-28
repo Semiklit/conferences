@@ -7,7 +7,7 @@ import java.util.List;
 import ru.nikitasemiklit.diploma.model.Conference;
 import ru.nikitasemiklit.diploma.model.Section;
 
-public class CreateConfereceRequest {
+public class CreateConferenceRequest {
 
     @SerializedName("conference")
     Conference conference;
@@ -15,7 +15,7 @@ public class CreateConfereceRequest {
     @SerializedName("sections_list")
     List<Section> sectionList;
 
-    public CreateConfereceRequest(Conference conference, List<Section> sectionList) {
+    public CreateConferenceRequest(Conference conference, List<Section> sectionList) {
         this.conference = conference;
         this.sectionList = sectionList;
     }

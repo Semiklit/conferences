@@ -1,9 +1,11 @@
-package ru.nikitasemiklit.diploma.activities;
+package ru.nikitasemiklit.diploma.ui.fragments;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,25 +26,36 @@ import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.model.Conference;
 import ru.nikitasemiklit.diploma.model.ConferenceLab;
 import ru.nikitasemiklit.diploma.responses.ConferencesResponse;
+import ru.nikitasemiklit.diploma.ui.activities.ConferenceDetailActivity;
+import ru.nikitasemiklit.diploma.ui.createConference.CreateConferenceActivity;
 
-public class ConferenceListActivity extends Activity {
+public class ConferenceListFragment extends Fragment {
 
     public static final String EXTRA_CONFERENCE_ID = "ru.nikitasemiklit.android.susu_conference.conference_id";
+    private Context context;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_conference_list);
-        setTitle("Список конференций");
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
-        final ConferenceLab conferenceLab = ConferenceLab.get(getApplicationContext());
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_conference_list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final ConferenceLab conferenceLab = ConferenceLab.get(context);
         final ConferenceAdapter adapter = new ConferenceAdapter(conferenceLab.getConferences());
 
         App.getClient().getConferences(App.getToken()).enqueue(new Callback<ConferencesResponse>() {
             @Override
             public void onResponse(Call<ConferencesResponse> call, Response<ConferencesResponse> response) {
                 adapter.setConferences(response.body().getConferences());
-                Toast.makeText(ConferenceListActivity.this, "Данные обновлены", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Данные обновлены", Toast.LENGTH_SHORT).show();
                 conferenceLab.addConferences(response.body().getConferences());
             }
 
@@ -52,16 +65,18 @@ public class ConferenceListActivity extends Activity {
             }
         });
 
-        RecyclerView mRecyclerView = findViewById(R.id.rv_conference_list);
+        RecyclerView mRecyclerView = view.findViewById(R.id.rv_conference_list);
         mRecyclerView.setAdapter(adapter);
 
-        FloatingActionMenu fabMenu = findViewById(R.id.fab_menu);
+        FloatingActionMenu fabMenu = view.findViewById(R.id.fab_menu);
         fabMenu.setClosedOnTouchOutside(true);
-        FloatingActionButton fabTemplate = findViewById(R.id.fab_new_conference);
+        FloatingActionButton fabTemplate = view.findViewById(R.id.fab_new_conference);
+        Drawable addFabIcon = getResources().getDrawable(R.drawable.ic_meeting);
+        fabTemplate.setImageDrawable(addFabIcon);
         fabTemplate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ConferenceListActivity.this, CreateConferenceActivity.class);
+                Intent i = new Intent(context, CreateConferenceActivity.class);
                 startActivity(i);
             }
         });
@@ -80,7 +95,7 @@ public class ConferenceListActivity extends Activity {
         @Override
         @NonNull
         public ConferenceHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+            LayoutInflater inflater = LayoutInflater.from(context);
             View view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
             return new ConferenceHolder(view);
         }
@@ -92,7 +107,7 @@ public class ConferenceListActivity extends Activity {
             holder.mTitleTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(getApplicationContext(), ConferenceDetailActivity.class);
+                    Intent i = new Intent(context, ConferenceDetailActivity.class);
                     i.putExtra(EXTRA_CONFERENCE_ID, conference.getConferenceId());
                     startActivity(i);
                 }

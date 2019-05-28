@@ -18,6 +18,15 @@ public class Section{
     @SerializedName("desc")
     private String mDesc;
 
+    public Section() {
+
+    }
+
+    public Section(String mTitle, String mDesc) {
+        this.mTitle = mTitle;
+        this.mDesc = mDesc;
+    }
+
     public UUID getSectionId() {
         return mSectionId;
     }

@@ -14,26 +14,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".activities.LoginActivity"
-            android:label="Вход">
+        <activity android:name=".ui.activities.TabBarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ConferenceDetailActivity" />
-        <activity android:name=".activities.ConferenceListActivity" />
-        <activity android:name=".activities.ReportRegistrationActivity" />
-        <activity android:name=".activities.SingupActivity" />
-        <activity android:name=".activities.TimeTableActivity" />
-        <activity android:name=".activities.SectionTableActivity" />
+        <activity
+            android:name=".ui.fragments.LoginFragment"
+            android:label="Вход">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity android:name=".ui.activities.ConferenceDetailActivity" />
+        <activity android:name=".ui.activities.ReportRegistrationActivity" />
+        <activity android:name=".ui.activities.SingupActivity" />
+        <activity android:name=".ui.activities.TimeTableActivity" />
+        <activity android:name=".ui.activities.SectionTableActivity" />
         <activity
             android:name="com.vk.sdk.VKServiceActivity"
             android:label="ServiceActivity"
             android:theme="@style/VK.Transparent" />
-        <activity android:name=".activities.CreateConferenceActivity" />
+        <activity android:name=".ui.activities.CreateConferenceActivity" />
+        <activity android:name=".ui.createConference.CreateConferenceActivity" />
     </application>
 
 </manifest>

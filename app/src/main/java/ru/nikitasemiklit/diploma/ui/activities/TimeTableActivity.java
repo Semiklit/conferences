@@ -1,4 +1,4 @@
-package ru.nikitasemiklit.diploma.activities;
+package ru.nikitasemiklit.diploma.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

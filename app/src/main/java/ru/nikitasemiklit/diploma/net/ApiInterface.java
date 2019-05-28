@@ -6,7 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import ru.nikitasemiklit.diploma.requests.CreateConfereceRequest;
+import ru.nikitasemiklit.diploma.requests.CreateConferenceRequest;
 import ru.nikitasemiklit.diploma.responses.ConferencesResponse;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
 import ru.nikitasemiklit.diploma.responses.ReportsResponse;
@@ -67,7 +67,7 @@ public interface ApiInterface {
     @POST(PATH_CREATE)
     Call<Response> createConference(@Header("Authorization") String token,
                                     @Query(PARAMETER_ACTION) String action,
-                                    @Body CreateConfereceRequest createConfereceRequest);
+                                    @Body CreateConferenceRequest createConferenceRequest);
 
 
 }

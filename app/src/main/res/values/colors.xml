@@ -3,4 +3,122 @@
     <color name="colorPrimary">#42a5f5</color>
     <color name="colorPrimaryDark">#0077c2</color>
     <color name="colorAccent">#000000</color>
+
+
+    <color name="accent_color">#647c8a</color>
+    <!--Background settings-->
+    <color name="window_background">#f9fAfA</color>
+    <color name="listview_separator_background">#9b9b9b</color>
+    <!--Drawer settings-->
+    <color name="drawer_background">#f9fAfA</color>
+    <color name="drawer_item_count_color">#bb3237</color>
+    <color name="drawer_item_text_color">#000000</color>
+    <color name="drawer_header_text_color">#ffffff</color>
+    <color name="drawer_icon_color">#454545</color>
+    <color name="drawer_icon_stroke_color">#00000000</color>
+
+    <!--Items settings-->
+    <color name="item_pressed_background">#11000000</color>
+    <color name="item_enabled_background">@color/window_background</color>
+    <color name="item_disabled_background">@color/item_pressed_background</color>
+    <!--Text Settings-->
+    <color name="text_color_primary">#000000</color>
+    <color name="text_color_secondary">#999999</color>
+    <color name="text_color_error">#bb3237</color>
+    <color name="text_color_header">#bb3237</color>
+    <color name="text_color_amount_expense">#000000</color>
+    <color name="text_color_amount_income">#60ac5d</color>
+    <color name="text_grey_transparent">#8b000000</color>
+    <color name="item_header_background">#e6e6e6</color>
+    <color name="item_drawer_header">#d0d1d3</color>
+    <color name="edit_text_amount_text_color">@color/colorPrimary</color>
+    <color name="payment_mandatory_field_empty_star">#b62126</color>
+    <color name="operation_complete_background">#cc000000</color>
+    <!--PIN settings-->
+    <!--Login layout-->
+    <color name="pin_name_login_layout">#000000</color>
+    <color name="pin_input_view_login_background">#999999</color>
+    <color name="pin_input_view_login_foreground">#647c8a</color>
+    <color name="pin_keyboard_view_login_color">#647c8a</color>
+    <color name="pin_login_key_pressed">#644d4d4d</color>
+    <!--AlertDialog layout-->
+    <color name="pin_name_alert_layout">#000000</color>
+    <color name="pin_input_view_alert_background">#999999</color>
+    <color name="pin_input_view_alert_foreground">#647c8a</color>
+    <color name="pin_keyboard_view_alert_color">#647c8a</color>
+    <color name="pin_key_pressed">#644d4d4d</color>
+    <!--Transfer confirmation-->
+    <color name="item_1">@color/window_background</color>
+    <color name="item_2">#e6e6e6</color>
+    <color name="spinner_divider_color">#727373</color>
+    <!--Currency rate-->
+    <color name="currency_header">#cccccc</color>
+    <color name="currency_line1">#f9fafa</color>
+    <color name="currency_line2">#e6e6e6</color>
+    <color name="toolbar_gradient_start_color">#002e67</color>
+    <color name="toolbar_gradient_end_color">#005aa0</color>
+    <!--ToolBar Settings-->
+    <color name="toolbar_icon_color">#ffffff</color>
+    <color name="toolbar_background">#b62126</color>
+    <color name="toolbar_dashboard_background">#e6e6e6</color>
+    <!--Button settings-->
+    <color name="button_color_enabled">#647c8a</color>
+    <color name="button_color_disabled">#55647c8a</color>
+    <color name="button_color_pressed">#3b474e</color>
+    <color name="button_enabled_text_color">#ffffff</color>
+    <color name="button_disabled_text_color">#55ffffff</color>
+    <!--LoginButton settings-->
+    <color name="button_login_color_enabled">#647c8a</color>
+    <color name="button_login_color_disabled">#55647c8a</color>
+    <color name="button_login_color_pressed">#3b474e</color>
+    <color name="button_login_enabled_text_color">#ffffff</color>
+    <color name="button_login_disabled_text_color">#55ffffff</color>
+    <color name="account_shape_solid_default">@color/accent_color</color>
+    <!--Account shape-->
+    <color name="account_shape_color_0">#607d8b</color>
+    <color name="account_shape_color_1">#ff5722</color>
+    <color name="account_shape_color_2">#009688</color>
+    <color name="account_shape_color_3">#673ab7</color>
+    <color name="account_shape_color_4">#2196f3</color>
+    <color name="account_shape_color_5">#e91e64</color>
+    <color name="account_shape_color_6">#f44336</color>
+    <color name="account_shape_color_7">#9c27b0</color>
+    <color name="card_info_title_primary_accounts">#7c151b</color>
+    <color name="list_header_color">#7c151b</color>
+    <!--TabView settings-->
+    <color name="tab_background">#b62126</color>
+    <color name="tab_indicator">#ffffff</color>
+    <color name="tab_divider">#b62126</color>
+    <color name="tab_text">#ffffff</color>
+    <color name="tab_text_secondary">#ccffffff</color>
+    <!--Captcha-->
+    <color name="captcha_text_color">#647c8a</color>
+    <!--Limits Settings-->
+    <color name="limit_choice_alert">#607d8b</color>
+    <color name="limit_shape_low">#f44336</color>
+    <color name="limit_shape_middle">#f0aa33</color>
+    <color name="limit_shape_high">#069b4d</color>
+    <!--Fingerprint Settings-->
+    <color name="fingerprint_success_color">#009688</color>
+    <color name="fingerprint_warning_color">#f4511e</color>
+    <color name="fingerprint_hint_color">#42000000</color>
+    <color name="fingerprint_login_background">@color/button_login_color_disabled</color>
+    <!--Floating action Buttons Settings-->
+    <color name="fab_menu_color_normal">#607d8b</color>
+    <color name="fab_menu_color_pressed">#3b474e</color>
+    <color name="fab_menu_background_color">#ccffffff</color>
+    <!--FAB Menu Items-->
+    <color name="fab_menu_item_color_normal">#607d8b</color>
+    <color name="fab_menu_item_color_pressed">#3b474e</color>
+    <color name="fab_icon_color">#ffffff</color>
+    <!--Swipe refresh color scheme-->
+    <color name="swiperefresh_color1">#b62126</color>
+    <color name="swiperefresh_color2">#b63c40</color>
+    <color name="swiperefresh_color3">#b9595c</color>
+    <!--AlertDialog colors-->
+    <color name="alertdialog_highlight">#11000000</color>
+    <color name="alertdialog_primary">#607d8b</color>
+    <color name="alertdialog_text_color">#000000</color>
+    <color name="alertdialog_background">#f9fAfA</color>
+    <color name="vcard_error">#D50000</color>
 </resources>

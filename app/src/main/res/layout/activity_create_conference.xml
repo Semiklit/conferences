@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="bottom"
+            android:singleLine="false"
             android:text="Название"
-            android:textSize="40sp" />
+            android:textAllCaps="true"
+            android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp">
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/conference_title"
@@ -30,7 +38,11 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:minHeight="55dp"
+            android:paddingStart="16dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/conference_desc"
@@ -42,61 +54,131 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="bottom"
+            android:singleLine="true"
             android:text="Даты проведения"
-            android:textSize="40sp" />
+            android:textAllCaps="true"
+            android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
 
-        <TextView
-            android:id="@+id/date_conference_start"
+        <RelativeLayout
+            android:id="@+id/date_conference_start_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center_horizontal"
-            android:text="Выберите дату начала"
-            android:textSize="30sp"
-            tools:text="C 21.12.2019" />
+            android:background="@drawable/selectable_item_background"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/date_conference_end"
+            <TextView
+                android:id="@+id/date_conference_start"
+                style="@style/PB.TextAppearance.MiddleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="21.12.2019" />
+
+            <TextView
+                style="@style/PB.TextSecondaryAppearance.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_conference_start"
+                android:text="Дата начала" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/date_conference_end_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center_horizontal"
-            android:text="Выберите дату окончания"
-            android:textSize="30sp"
-            tools:text="По 21.12.2019" />
+            android:background="@drawable/selectable_item_background"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/date_conference_end"
+                style="@style/PB.TextAppearance.MiddleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="21.12.2019" />
+
+            <TextView
+                style="@style/PB.TextSecondaryAppearance.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_conference_end"
+                android:text="Дата окончания" />
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="bottom"
+            android:singleLine="true"
             android:text="Окончание регистрации"
-            android:textSize="40sp" />
+            android:textAllCaps="true"
+            android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
 
-
-        <TextView
-            android:id="@+id/date_end_registration"
+        <RelativeLayout
+            android:id="@+id/date_end_registration_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center_horizontal"
-            android:textSize="30sp"
-            tools:text="21.12.2019" />
+            android:background="@drawable/selectable_item_background"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/date_end_registration"
+                style="@style/PB.TextAppearance.MiddleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="21.12.2019" />
+
+            <TextView
+                style="@style/PB.TextSecondaryAppearance.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_end_registration"
+                android:text="Окночание регистрации" />
+
+        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="bottom"
+            android:singleLine="true"
             android:text="Секции"
-            android:textSize="40sp" />
+            android:textAllCaps="true"
+            android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_sections"
+        <LinearLayout
+            android:id="@+id/sections_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+            android:orientation="vertical"
+            android:padding="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/add_section_layout"
+            android:layout_height="55dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/selectable_item_background"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:src="@drawable/ic_plus" />
+
+            <TextView
+                style="@style/PB.TextAppearance.ItemValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Добавить секцию" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
