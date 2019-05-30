@@ -10,10 +10,10 @@ import ru.nikitasemiklit.diploma.model.Section;
 public class CreateConferenceRequest {
 
     @SerializedName("conference")
-    Conference conference;
+    private Conference conference;
 
     @SerializedName("sections_list")
-    List<Section> sectionList;
+    private List<Section> sectionList;
 
     public CreateConferenceRequest(Conference conference, List<Section> sectionList) {
         this.conference = conference;

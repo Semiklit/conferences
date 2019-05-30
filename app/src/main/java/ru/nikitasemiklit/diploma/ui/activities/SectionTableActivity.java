@@ -9,67 +9,47 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import ru.nikitasemiklit.diploma.App;
 import ru.nikitasemiklit.diploma.R;
+import ru.nikitasemiklit.diploma.managers.DataManager;
 import ru.nikitasemiklit.diploma.model.Section;
-import ru.nikitasemiklit.diploma.model.SectionLab;
-import ru.nikitasemiklit.diploma.responses.SectionsResponse;
 import ru.nikitasemiklit.diploma.ui.fragments.ConferenceListFragment;
 
 public class SectionTableActivity extends AppCompatActivity {
 
+    public static final String EXTRA_SECTION_ID = "ru.nikitasemiklit.susu_conference.section_id";
     UUID mConferenceID;
     RecyclerView mRecyclerView;
-
-    public static final String EXTRA_SECTION_ID = "ru.nikitasemiklit.susu_conference.section_id";
+    SectionAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_section_table);
         setTitle("Секции");
-
         mConferenceID = (UUID) getIntent().getSerializableExtra(ConferenceListFragment.EXTRA_CONFERENCE_ID);
-
-        final SectionLab sectionLab = SectionLab.get(getApplicationContext());
-        final SectionAdapter adapter = new SectionAdapter(sectionLab.getSections(mConferenceID));
-
-        App.getClient().getSections(App.getToken(), mConferenceID).enqueue(new Callback<SectionsResponse>() {
-            @Override
-            public void onResponse(Call<SectionsResponse> call, Response<SectionsResponse> response) {
-                adapter.setSections(response.body().getSections());
-                adapter.notifyDataSetChanged();
-                sectionLab.addSections(response.body().getSections(), mConferenceID);
-                Toast.makeText(SectionTableActivity.this, "Данные обновлены", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<SectionsResponse> call, Throwable t) {
-
-            }
-        });
-
+        adapter = new SectionAdapter();
         mRecyclerView = findViewById(R.id.rv_section_list);
         mRecyclerView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Section> mSections = new ArrayList<>();
+        for (UUID sectionId : DataManager.getConference(mConferenceID).getSectionsIds()) {
+            mSections.add(DataManager.getSection(sectionId));
+        }
+        adapter.setSections(mSections);
+    }
 
     private class SectionAdapter extends RecyclerView.Adapter<SectionHolder> {
 
         private List<Section> mSections;
-
-        SectionAdapter(List<Section> sections) {
-            mSections = sections;
-        }
 
         @Override
         @NonNull
@@ -100,6 +80,7 @@ public class SectionTableActivity extends AppCompatActivity {
 
         void setSections(List<Section> sections) {
             mSections = sections;
+            notifyDataSetChanged();
         }
     }
 

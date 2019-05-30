@@ -1,5 +1,7 @@
 package ru.nikitasemiklit.diploma.net;
 
+import java.util.UUID;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -7,11 +9,9 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import ru.nikitasemiklit.diploma.requests.CreateConferenceRequest;
-import ru.nikitasemiklit.diploma.responses.ConferencesResponse;
+import ru.nikitasemiklit.diploma.responses.DataResponse;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
-import ru.nikitasemiklit.diploma.responses.ReportsResponse;
 import ru.nikitasemiklit.diploma.responses.Response;
-import ru.nikitasemiklit.diploma.responses.SectionsResponse;
 
 public interface ApiInterface {
 
@@ -29,6 +29,7 @@ public interface ApiInterface {
     String ACTION_AUTH = "auth";
     String PARAMETER_ID = "id";
     String PARAMETER_CONFERENCE_ID = "conference.id";
+    String PARAMETER_COUNT = "count";
     String PARAMETER_SECTION_ID = "section.id";
     String PARAMETER_AUTH_METHOD = "auth.method";
     String PARAMETER_AUTH_EMAIL = "auth.email";
@@ -50,19 +51,14 @@ public interface ApiInterface {
                                    @Query(PARAMETER_EXT_SERVICE_TOKEN) String token);
 
     @GET(PATH_DATA)
-    Call<ReportsResponse> getReports(@Header("Authorization") String token,
-                                             @Query(PARAMETER_ACTION) String action,
-                                             @Query(PARAMETER_SECTION_ID) String sectionId);
+    Call<DataResponse> getConferences(@Header("Authorization") String token,
+                                      @Query(PARAMETER_ACTION) String action,
+                                      @Query(PARAMETER_COUNT) int count);
 
     @GET(PATH_DATA)
-    Call<SectionsResponse> getSections(@Header("Authorization") String token,
-                                       @Query(PARAMETER_ACTION) String action,
-                                       @Query(PARAMETER_CONFERENCE_ID) String conferenceId);
-
-
-    @GET(PATH_DATA)
-    Call<ConferencesResponse> getConferences(@Header("Authorization") String token,
-                                             @Query(PARAMETER_ACTION) String action);
+    Call<DataResponse> getConferences(@Header("Authorization") String token,
+                                      @Query(PARAMETER_ACTION) String action,
+                                      @Query(PARAMETER_CONFERENCE_ID) UUID conference_id);
 
     @POST(PATH_CREATE)
     Call<Response> createConference(@Header("Authorization") String token,

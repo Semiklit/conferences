@@ -42,10 +42,14 @@ import ru.nikitasemiklit.diploma.widgets.SectionView;
 
 public class CreateConferenceActivity extends AppCompatActivity {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
-            "dd.MM.yy", Locale.getDefault());
+    public static final int MODE_CREATE = 0;
 
 //    int colors [] = {R.color.colorPrimary, R.color.text_color_secondary};
+    public static final int MODE_EDIT = 1;
+    public static final int MODE_VIEW = 2;
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
+            "dd.MM.yy", Locale.getDefault());
+    int mode;
 
     LinearLayout sectionsLayout;
     LinearLayout addSection;
@@ -256,7 +260,7 @@ public class CreateConferenceActivity extends AppCompatActivity {
                             etDesc.getText().toString(),
                             conferenceStart, conferenceEnd, conferenceRegistrationEnd, swIsPublic.isChecked(), UUID.randomUUID(), city.getText().toString(), false);
                     CreateConferenceRequest createConferenceRequest = new CreateConferenceRequest(conference, sectionList);
-                    App.getClient().createConferce(App.getToken(), createConferenceRequest).enqueue(new Callback<Response>() {
+                    App.getClient().createConference(App.getToken(), createConferenceRequest).enqueue(new Callback<Response>() {
                         @Override
                         public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                             if (response.body().getStatus() == Response.STATUS_OK) {
@@ -271,6 +275,8 @@ public class CreateConferenceActivity extends AppCompatActivity {
                             Toast.makeText(CreateConferenceActivity.this, "Произошла ошибка", Toast.LENGTH_SHORT).show();
                         }
                     });
+                } else {
+                    Toast.makeText(CreateConferenceActivity.this, "Заполните все поля", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
@@ -284,7 +290,9 @@ public class CreateConferenceActivity extends AppCompatActivity {
                 conferenceStart != null &&
                 conferenceEnd != null &&
                 conferenceStart.before(conferenceEnd) &&
-                conferenceRegistrationEnd != null;
+                conferenceRegistrationEnd != null &&
+                !TextUtils.isEmpty(city.getText()) &&
+                !sectionList.isEmpty();
     }
 
     private void setStartDate(Date date) {
@@ -308,10 +316,19 @@ public class CreateConferenceActivity extends AppCompatActivity {
         }
     }
 
-    private void addSection(Section section) {
-        SectionView view = new SectionView(this, null);
-        view.setSection(section);
-        sectionsLayout.addView(view);
+    private void addSection(final Section section) {
+        final SectionView sectionView = new SectionView(this, null);
+        sectionView.setSection(section);
+        sectionsLayout.addView(sectionView);
         sectionList.add(section);
+        if (mode != MODE_VIEW) {
+            sectionView.setOnDeleteClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sectionList.remove(section);
+                    sectionsLayout.removeView(sectionView);
+                }
+            });
+        }
     }
 }

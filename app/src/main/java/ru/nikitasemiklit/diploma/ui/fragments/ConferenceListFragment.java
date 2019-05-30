@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -23,9 +22,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.nikitasemiklit.diploma.App;
 import ru.nikitasemiklit.diploma.R;
+import ru.nikitasemiklit.diploma.managers.DataManager;
 import ru.nikitasemiklit.diploma.model.Conference;
-import ru.nikitasemiklit.diploma.model.ConferenceLab;
-import ru.nikitasemiklit.diploma.responses.ConferencesResponse;
+import ru.nikitasemiklit.diploma.responses.DataResponse;
 import ru.nikitasemiklit.diploma.ui.activities.ConferenceDetailActivity;
 import ru.nikitasemiklit.diploma.ui.createConference.CreateConferenceActivity;
 
@@ -48,19 +47,19 @@ public class ConferenceListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final ConferenceLab conferenceLab = ConferenceLab.get(context);
-        final ConferenceAdapter adapter = new ConferenceAdapter(conferenceLab.getConferences());
+        final ConferenceAdapter adapter = new ConferenceAdapter();
 
-        App.getClient().getConferences(App.getToken()).enqueue(new Callback<ConferencesResponse>() {
+        App.getClient().getData(App.getToken()).enqueue(new Callback<DataResponse>() {
             @Override
-            public void onResponse(Call<ConferencesResponse> call, Response<ConferencesResponse> response) {
-                adapter.setConferences(response.body().getConferences());
-                Toast.makeText(context, "Данные обновлены", Toast.LENGTH_SHORT).show();
-                conferenceLab.addConferences(response.body().getConferences());
+            public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
+                if (response.body() != null) {
+                    DataManager.setDataResponse(response.body());
+                    adapter.setConferences(response.body().getConferenceList());
+                }
             }
 
             @Override
-            public void onFailure(Call<ConferencesResponse> call, Throwable t) {
+            public void onFailure(Call<DataResponse> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -87,10 +86,6 @@ public class ConferenceListFragment extends Fragment {
     private class ConferenceAdapter extends RecyclerView.Adapter<ConferenceHolder> {
 
         private List<Conference> mConferences;
-
-        ConferenceAdapter(List<Conference> conferences) {
-            mConferences = conferences;
-        }
 
         @Override
         @NonNull

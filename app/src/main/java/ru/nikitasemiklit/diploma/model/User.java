@@ -4,10 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.UUID;
 
-/**
- * Created by nikitasemiklit1 on 23.05.17.
- */
-
 public class User {
     @SerializedName("user_id")
     private UUID mUserId;

@@ -3,11 +3,8 @@ package ru.nikitasemiklit.diploma.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
-
-/**
- * Created by nikitasemiklit1 on 02.04.17.
- */
 
 public class Conference {
     @SerializedName("conference_id")
@@ -30,6 +27,8 @@ public class Conference {
     private String city;
     @SerializedName("conference_is_favourite")
     private boolean isFavourite;
+    @SerializedName("conference_sections_id")
+    private List<UUID> sectionsIds;
 
 
     //Из базы
@@ -98,5 +97,9 @@ public class Conference {
 
     public boolean isFavourite() {
         return isFavourite;
+    }
+
+    public List<UUID> getSectionsIds() {
+        return sectionsIds;
     }
 }

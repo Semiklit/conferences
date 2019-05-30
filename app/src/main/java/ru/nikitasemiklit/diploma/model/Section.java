@@ -2,11 +2,8 @@ package ru.nikitasemiklit.diploma.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
 import java.util.UUID;
-
-/**
- * Created by nikitasemiklit1 on 02.04.17.
- */
 
 public class Section{
     @SerializedName("section_id")
@@ -17,6 +14,8 @@ public class Section{
     private String mTitle;
     @SerializedName("desc")
     private String mDesc;
+    @SerializedName("reports_ids")
+    List<UUID> reportsIds;
 
     public Section() {
 
@@ -57,5 +56,9 @@ public class Section{
 
     public void setDesc(String desc) {
         mDesc = desc;
+    }
+
+    public List<UUID> getReportsIds() {
+        return reportsIds;
     }
 }

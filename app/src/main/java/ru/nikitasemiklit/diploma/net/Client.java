@@ -11,11 +11,9 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.nikitasemiklit.diploma.requests.CreateConferenceRequest;
-import ru.nikitasemiklit.diploma.responses.ConferencesResponse;
+import ru.nikitasemiklit.diploma.responses.DataResponse;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
-import ru.nikitasemiklit.diploma.responses.ReportsResponse;
 import ru.nikitasemiklit.diploma.responses.Response;
-import ru.nikitasemiklit.diploma.responses.SectionsResponse;
 
 public class Client {
     private static final String ENDPOINT = "https://conference.semiklit.keenetic.pro/";
@@ -47,19 +45,15 @@ public class Client {
         return apiInterface.loginViaVk(ApiInterface.ACTION_AUTH, "vk", userId, token);
     }
 
-    public Call<SectionsResponse> getSections(UUID token, UUID conferenceID) {
-        return apiInterface.getSections(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_SECTION_LIST, conferenceID.toString());
+    public Call<DataResponse> getData(UUID token) {
+        return apiInterface.getConferences(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_CONFERENCE_LIST, 10);
     }
 
-    public Call<ConferencesResponse> getConferences(UUID token) {
-        return apiInterface.getConferences(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_CONFERENCE_LIST);
+    public Call<DataResponse> getData(UUID token, UUID conference_id) {
+        return apiInterface.getConferences(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_CONFERENCE_LIST, conference_id);
     }
 
-    public Call<ReportsResponse> getReports(UUID token, UUID sectionID) {
-        return apiInterface.getReports(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_REPORTS_LIST, sectionID.toString());
-    }
-
-    public Call<Response> createConferce(UUID token, CreateConferenceRequest request) {
+    public Call<Response> createConference(UUID token, CreateConferenceRequest request) {
         return apiInterface.createConference(token != null ? token.toString() : "none", ApiInterface.ACTION_CREATE_CONFERENCE, request);
     }
 
