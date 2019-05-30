@@ -56,6 +56,46 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:gravity="bottom"
+            android:singleLine="false"
+            android:text="Место проведения"
+            android:textAllCaps="true"
+            android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/conference_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Город" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="bottom"
+            android:singleLine="false"
+            android:text="Приватность"
+            android:textAllCaps="true"
+            android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/conference_public_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:text="Закрытая" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="bottom"
             android:singleLine="true"
             android:text="Даты проведения"
             android:textAllCaps="true"

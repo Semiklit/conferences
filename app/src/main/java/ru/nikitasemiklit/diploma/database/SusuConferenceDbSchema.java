@@ -14,7 +14,11 @@ public class SusuConferenceDbSchema {
             public static final String DESC = "desc";
             public static final String START_DATE = "start_date";
             public static final String END_DATE = "end_date";
-            public static final String END_REGISTRAIOTN_DATE = "end_registration_date";
+            public static final String END_REGISTRATIOTN_DATE = "end_registration_date";
+            public static final String IS_PUBLIC = "is_public";
+            public static final String OWNER_UUID = "owner_uuid";
+            public static final String CITY = "city";
+            public static final String IS_FAVOURITE = "is_favourite";
         }
     }
 

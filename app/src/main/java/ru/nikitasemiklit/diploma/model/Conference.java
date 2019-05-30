@@ -22,23 +22,42 @@ public class Conference {
     private Date mEndConference;
     @SerializedName("conference_registration_end")
     private Date mEndRegistration;
+    @SerializedName("conference_is_public")
+    private boolean isPublic;
+    @SerializedName("conference_owner_id")
+    private UUID ownerID;
+    @SerializedName("conference_city")
+    private String city;
+    @SerializedName("conference_is_favourite")
+    private boolean isFavourite;
 
-    public Conference(UUID mConferenceId, String mTitle, String mDesc, Date mStartConference, Date mEndConference, Date mEndRegistration) {
+
+    //Из базы
+    public Conference(UUID mConferenceId, String mTitle, String mDesc, Date mStartConference, Date mEndConference, Date mEndRegistration, boolean isPublic, UUID ownerID, String city, boolean isFavourite) {
         this.mConferenceId = mConferenceId;
         this.mTitle = mTitle;
         this.mDesc = mDesc;
         this.mStartConference = mStartConference;
         this.mEndConference = mEndConference;
         this.mEndRegistration = mEndRegistration;
+        this.isPublic = isPublic;
+        this.ownerID = ownerID;
+        this.city = city;
+        this.isFavourite = isFavourite;
     }
 
-    public Conference(String mTitle, String mDesc, Date mStartConference, Date mEndConference, Date mEndRegistration) {
+    //Новая конференция
+    public Conference(String mTitle, String mDesc, Date mStartConference, Date mEndConference, Date mEndRegistration, boolean isPublic, UUID ownerID, String city, boolean isFavourite) {
         mConferenceId = UUID.randomUUID();
         this.mTitle = mTitle;
         this.mDesc = mDesc;
         this.mStartConference = mStartConference;
         this.mEndConference = mEndConference;
         this.mEndRegistration = mEndRegistration;
+        this.isPublic = isPublic;
+        this.ownerID = ownerID;
+        this.city = city;
+        this.isFavourite = isFavourite;
     }
 
     public UUID getConferenceId() {
@@ -63,5 +82,21 @@ public class Conference {
 
     public Date getEndRegistration() {
         return mEndRegistration;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public UUID getOwnerID() {
+        return ownerID;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
     }
 }

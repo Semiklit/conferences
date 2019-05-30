@@ -30,7 +30,11 @@ public class SusuConferenceBaseHelper extends SQLiteOpenHelper{
                 ConferenceTable.Cols.DESC + ", " +
                 ConferenceTable.Cols.START_DATE + ", " +
                 ConferenceTable.Cols.END_DATE + ", " +
-                ConferenceTable.Cols.END_REGISTRAIOTN_DATE +
+                ConferenceTable.Cols.END_REGISTRATIOTN_DATE + ", " +
+                ConferenceTable.Cols.IS_PUBLIC + ", " +
+                ConferenceTable.Cols.OWNER_UUID + ", " +
+                ConferenceTable.Cols.CITY + ", " +
+                ConferenceTable.Cols.IS_FAVOURITE +
                 ")"
         );
 

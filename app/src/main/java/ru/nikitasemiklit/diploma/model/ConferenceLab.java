@@ -38,7 +38,11 @@ public class ConferenceLab {
         values.put(ConferenceTable.Cols.DESC, conference.getDesc());
         values.put(ConferenceTable.Cols.START_DATE, DateUtil.formatDate(conference.getStartConference()));
         values.put(ConferenceTable.Cols.END_DATE, DateUtil.formatDate(conference.getEndConference()));
-        values.put(ConferenceTable.Cols.END_REGISTRAIOTN_DATE, DateUtil.formatDate(conference.getEndRegistration()));
+        values.put(ConferenceTable.Cols.END_REGISTRATIOTN_DATE, DateUtil.formatDate(conference.getEndRegistration()));
+        values.put(ConferenceTable.Cols.IS_PUBLIC, conference.isPublic() ? 1 : 0);
+        values.put(ConferenceTable.Cols.OWNER_UUID, conference.getOwnerID().toString());
+        values.put(ConferenceTable.Cols.CITY, conference.getCity());
+        values.put(ConferenceTable.Cols.IS_FAVOURITE, conference.isFavourite() ? 1 : 0);
 
         return values;
     }

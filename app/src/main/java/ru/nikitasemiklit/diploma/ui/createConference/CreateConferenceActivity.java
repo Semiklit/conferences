@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,10 +45,14 @@ public class CreateConferenceActivity extends AppCompatActivity {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
             "dd.MM.yy", Locale.getDefault());
 
+//    int colors [] = {R.color.colorPrimary, R.color.text_color_secondary};
+
     LinearLayout sectionsLayout;
     LinearLayout addSection;
     EditText etTitle;
     EditText etDesc;
+    EditText city;
+    SwitchCompat swIsPublic;
     TextView tvStart;
     TextView tvEnd;
     TextView tvRegistrationEnd;
@@ -62,6 +69,19 @@ public class CreateConferenceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_conference);
         setTitle("Создание конференции");
         sectionsLayout = findViewById(R.id.sections_container);
+        city = findViewById(R.id.conference_city);
+        swIsPublic = findViewById(R.id.conference_public_switch);
+        swIsPublic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    buttonView.setText("Открытая");
+                } else {
+                    buttonView.setText("Закрытая");
+                }
+            }
+        });
+        swIsPublic.setChecked(false);
         addSection = findViewById(R.id.add_section_layout);
         addSection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,7 +254,7 @@ public class CreateConferenceActivity extends AppCompatActivity {
                 if (validateFields()) {
                     Conference conference = new Conference(etTitle.getText().toString(),
                             etDesc.getText().toString(),
-                            conferenceStart, conferenceEnd, conferenceRegistrationEnd);
+                            conferenceStart, conferenceEnd, conferenceRegistrationEnd, swIsPublic.isChecked(), UUID.randomUUID(), city.getText().toString(), false);
                     CreateConferenceRequest createConferenceRequest = new CreateConferenceRequest(conference, sectionList);
                     App.getClient().createConferce(App.getToken(), createConferenceRequest).enqueue(new Callback<Response>() {
                         @Override

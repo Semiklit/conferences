@@ -21,6 +21,10 @@ public class ConferenceCursorWrapper extends CursorWrapper {
                 getString(getColumnIndex(ConferenceTable.Cols.DESC)),
                 DateUtil.parseDate(getString(getColumnIndex(ConferenceTable.Cols.START_DATE))),
                 DateUtil.parseDate(getString(getColumnIndex(ConferenceTable.Cols.END_DATE))),
-                DateUtil.parseDate(getString(getColumnIndex(ConferenceTable.Cols.END_REGISTRAIOTN_DATE))));
+                DateUtil.parseDate(getString(getColumnIndex(ConferenceTable.Cols.END_REGISTRATIOTN_DATE))),
+                getInt(getColumnIndex(ConferenceTable.Cols.IS_PUBLIC)) == 1,
+                UUID.fromString(getString(getColumnIndex(ConferenceTable.Cols.OWNER_UUID))),
+                getString(getColumnIndex(ConferenceTable.Cols.CITY)),
+                getInt(getColumnIndex(ConferenceTable.Cols.IS_FAVOURITE)) == 1);
     }
 }
