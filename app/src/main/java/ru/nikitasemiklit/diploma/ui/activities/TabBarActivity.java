@@ -23,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.nikitasemiklit.diploma.App;
 import ru.nikitasemiklit.diploma.R;
+import ru.nikitasemiklit.diploma.managers.DataManager;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
 import ru.nikitasemiklit.diploma.ui.fragments.CalendarFragment;
 import ru.nikitasemiklit.diploma.ui.fragments.ConferenceListFragment;
@@ -53,12 +54,15 @@ public class TabBarActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.action_conference_list:
                         setFragment(conferencesList);
+                        setTitle("Конференции");
                         return true;
                     case R.id.action_calendar:
                         setFragment(calendar);
+                        setTitle("Календарь");
                         return true;
                     case R.id.action_person_info:
                         setFragment(App.hasToken() ? userInfo : loginFragment);
+                        setTitle(App.hasToken() ? "Личный кабинет" : "Авторизация");
                         return true;
                 }
                 return false;
@@ -91,6 +95,7 @@ public class TabBarActivity extends AppCompatActivity {
                         if (response.body().getStatus() == ru.nikitasemiklit.diploma.responses.Response.STATUS_OK) {
                             UUID token = response.body().getToken();
                             App.setToken(token);
+                            DataManager.setCurrentUser(response.body().getUser());
                             onUserAuthenticated();
                         }
                     }

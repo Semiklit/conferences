@@ -46,15 +46,13 @@ public class Conference {
     }
 
     //Новая конференция
-    public Conference(String mTitle, String mDesc, Date mStartConference, Date mEndConference, Date mEndRegistration, boolean isPublic, UUID ownerID, String city, boolean isFavourite) {
-        mConferenceId = UUID.randomUUID();
+    public Conference(String mTitle, String mDesc, Date mStartConference, Date mEndConference, Date mEndRegistration, boolean isPublic, String city, boolean isFavourite) {
         this.mTitle = mTitle;
         this.mDesc = mDesc;
         this.mStartConference = mStartConference;
         this.mEndConference = mEndConference;
         this.mEndRegistration = mEndRegistration;
         this.isPublic = isPublic;
-        this.ownerID = ownerID;
         this.city = city;
         this.isFavourite = isFavourite;
     }

@@ -42,6 +42,7 @@
         <activity android:name=".ui.activities.CreateConferenceActivity" />
         <activity android:name=".ui.createConference.CreateConferenceActivity" />
         <activity android:name=".ui.activities.ConferenceListActivity" />
+        <activity android:name=".ui.activities.ActivityReportConfirmation" />
     </application>
 
 </manifest>

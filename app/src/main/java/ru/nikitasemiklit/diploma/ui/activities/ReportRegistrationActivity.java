@@ -2,6 +2,8 @@ package ru.nikitasemiklit.diploma.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,8 +34,8 @@ public class ReportRegistrationActivity extends AppCompatActivity {
         setTitle("Регистрация доклада");
         conferenceId = (UUID) getIntent().getSerializableExtra(ConferenceListFragment.EXTRA_CONFERENCE_ID);
         mEditTextReportName = findViewById(R.id.et_report_registration_name);
-        mSectionSpinner = findViewById(R.id.sp_section_choose);
-        adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item);
+        mSectionSpinner = findViewById(R.id.section_chooser);
+        adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_expandable_list_item_1);
         mSectionSpinner.setAdapter(adapter);
         mSectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -51,6 +53,23 @@ public class ReportRegistrationActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_report_registration, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.create_report_item).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+        return true;
     }
 
     @Override

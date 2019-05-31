@@ -113,22 +113,14 @@ public class ConferenceListFragment extends Fragment {
         @NonNull
         public ConferenceHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            View view = inflater.inflate(R.layout.item_conference, parent, false);
             return new ConferenceHolder(view);
         }
 
         @Override
         public void onBindViewHolder(ConferenceHolder holder, final int position) {
             final Conference conference = mConferences.get(position);
-            holder.mTitleTextView.setText(conference.getTitle());
-            holder.mTitleTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(context, ConferenceDetailActivity.class);
-                    i.putExtra(EXTRA_CONFERENCE_ID, conference.getConferenceId());
-                    startActivity(i);
-                }
-            });
+            holder.setConference(conference);
         }
 
         @Override
@@ -146,10 +138,27 @@ public class ConferenceListFragment extends Fragment {
     private class ConferenceHolder extends RecyclerView.ViewHolder {
 
         TextView mTitleTextView;
+        TextView mDescTextView;
+        Conference conference;
 
         ConferenceHolder(View itemView) {
             super(itemView);
-            mTitleTextView = (TextView) itemView;
+            mTitleTextView = itemView.findViewById(R.id.title);
+            mDescTextView = itemView.findViewById(R.id.value);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, ConferenceDetailActivity.class);
+                    i.putExtra(EXTRA_CONFERENCE_ID, conference.getConferenceId());
+                    startActivity(i);
+                }
+            });
+        }
+
+        void setConference(Conference conference) {
+            this.conference = conference;
+            mTitleTextView.setText(conference.getTitle());
+            mDescTextView.setText(conference.getDesc());
         }
     }
 }

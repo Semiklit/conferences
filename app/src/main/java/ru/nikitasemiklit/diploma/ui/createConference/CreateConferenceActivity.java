@@ -28,7 +28,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -258,7 +257,7 @@ public class CreateConferenceActivity extends AppCompatActivity {
                 if (validateFields()) {
                     Conference conference = new Conference(etTitle.getText().toString(),
                             etDesc.getText().toString(),
-                            conferenceStart, conferenceEnd, conferenceRegistrationEnd, swIsPublic.isChecked(), UUID.randomUUID(), city.getText().toString(), false);
+                            conferenceStart, conferenceEnd, conferenceRegistrationEnd, swIsPublic.isChecked(), city.getText().toString(), false);
                     CreateConferenceRequest createConferenceRequest = new CreateConferenceRequest(conference, sectionList);
                     App.getClient().createConference(App.getToken(), createConferenceRequest).enqueue(new Callback<Response>() {
                         @Override

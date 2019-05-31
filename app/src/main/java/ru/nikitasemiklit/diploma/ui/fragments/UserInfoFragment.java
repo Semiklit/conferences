@@ -16,6 +16,7 @@ import retrofit2.Response;
 import ru.nikitasemiklit.diploma.App;
 import ru.nikitasemiklit.diploma.R;
 import ru.nikitasemiklit.diploma.managers.DataManager;
+import ru.nikitasemiklit.diploma.model.User;
 import ru.nikitasemiklit.diploma.responses.UserResponse;
 import ru.nikitasemiklit.diploma.ui.activities.ConferenceListActivity;
 
@@ -64,7 +65,10 @@ public class UserInfoFragment extends Fragment {
                 public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                     if (response.body() != null) {
                         DataManager.setCurrentUser(response.body().getUser());
-                        userName.setText(DataManager.getCurrentUser().getName());
+                        User user = DataManager.getCurrentUser();
+                        if (user != null) {
+                            userName.setText(DataManager.getCurrentUser().getName());
+                        }
                     }
                 }
 
