@@ -26,6 +26,11 @@ public class App extends Application {
         settings.edit().putString("token", token.toString()).apply();
     }
 
+    public static void clearToken(){
+        token = null;
+        settings.edit().remove("token").apply();
+    }
+
     public static boolean hasToken() {
         return token != null;
     }

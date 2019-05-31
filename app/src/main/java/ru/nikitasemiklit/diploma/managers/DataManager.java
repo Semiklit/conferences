@@ -16,6 +16,15 @@ public class DataManager {
     private static Map<UUID, Section> sectionMap = new HashMap<>();
     private static Map<UUID, Report> reportMap = new HashMap<>();
     private static Map<UUID, User> userMap = new HashMap<>();
+    private static User currentUser;
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        DataManager.currentUser = currentUser;
+    }
 
     public static Conference getConference(UUID id) {
         return conferenceMap.get(id);

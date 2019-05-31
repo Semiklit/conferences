@@ -41,6 +41,7 @@
             android:theme="@style/VK.Transparent" />
         <activity android:name=".ui.activities.CreateConferenceActivity" />
         <activity android:name=".ui.createConference.CreateConferenceActivity" />
+        <activity android:name=".ui.activities.ConferenceListActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="com_vk_sdk_AppId">6978682</integer>
+    <string name="google_client_id">478437036775–49u3nu9orrvv9i66ba1s27kv7j165ecs.apps.googleusercontent.com</string>
 </resources>

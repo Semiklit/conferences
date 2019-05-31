@@ -14,6 +14,7 @@ import ru.nikitasemiklit.diploma.requests.CreateConferenceRequest;
 import ru.nikitasemiklit.diploma.responses.DataResponse;
 import ru.nikitasemiklit.diploma.responses.LoginResponse;
 import ru.nikitasemiklit.diploma.responses.Response;
+import ru.nikitasemiklit.diploma.responses.UserResponse;
 
 public class Client {
     private static final String ENDPOINT = "https://conference.semiklit.keenetic.pro/";
@@ -46,7 +47,19 @@ public class Client {
     }
 
     public Call<DataResponse> getData(UUID token) {
-        return apiInterface.getConferences(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_CONFERENCE_LIST, 10);
+        return apiInterface.getConferences(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_CONFERENCE_LIST);
+    }
+
+    public Call<DataResponse> getOwnedConferences(UUID token) {
+        return apiInterface.getConferences(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_CONFERENCE_OWEND);
+    }
+
+    public Call<DataResponse> getFavoriteConferences(UUID token) {
+        return apiInterface.getConferences(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_CONFERENCE_FAVORITES);
+    }
+
+    public Call<UserResponse> getCurrentUser(UUID token) {
+        return apiInterface.getCurrentUser(token != null ? token.toString() : "none", ApiInterface.ACTION_GET_USER);
     }
 
     public Call<DataResponse> getData(UUID token, UUID conference_id) {
