@@ -30,6 +30,38 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:gravity="bottom"
         android:singleLine="false"
+        android:text="Докладчик"
+        android:textAllCaps="true"
+        android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:text="Иванов Иван" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:gravity="bottom"
+        android:singleLine="false"
+        android:text="Контактный номер"
+        android:textAllCaps="true"
+        android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:text="+71235017559" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:gravity="bottom"
+        android:singleLine="false"
         android:text="Описание"
         android:textAllCaps="true"
         android:textAppearance="@style/PB.TextHeaderAppearance.VerySmall" />
@@ -40,6 +72,7 @@
         android:layout_weight="1"
         android:padding="16dp"
         tools:text="Длинное описание доклала \nНа много строк" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
